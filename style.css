@@ -16,7 +16,7 @@ div {
 .output {
   border: 1px solid white;
   width: 480px;
-  height: 20px;
+  height: auto;
   font-family: Georgia, "Times New Roman", Times, serif;
   margin-left: 0px;
 }
