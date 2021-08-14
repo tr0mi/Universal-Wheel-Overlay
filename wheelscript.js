@@ -198,9 +198,9 @@ function wheelLoading() {
   setTimeout(function(){ button21.style.opacity = "0"; }, 4600);
 
   setTimeout(function(){ wheel.style.transitionDuration = "500ms"; }, 4800);
-  setTimeout(function(){ wheel.style.transform = 'rotate(-180deg)'; }, 4800);
+  setTimeout(function(){ wheel.style.transform = 'rotate(' + -wRot + 'deg)'; }, 4800);
   setTimeout(function(){ wheel.style.transform = 'rotate(0deg)'; }, 5500);
-  setTimeout(function(){ wheel.style.transform = 'rotate(180deg)'; }, 6200);
+  setTimeout(function(){ wheel.style.transform = 'rotate(' + wRot + 'deg)'; }, 6200);
   setTimeout(function(){ wheel.style.transform = 'rotate(0deg)'; }, 6900);
   setTimeout(function(){ wheel.style.transitionDuration = "0ms"; }, 7400);
 
