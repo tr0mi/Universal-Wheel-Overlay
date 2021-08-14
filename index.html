@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Wheel Overlay</title>
+    <script src="script.js" defer></script>
+    <script	src="wheelscript.js" defer></script>
+    <link id="pagestyle" rel="stylesheet" href="style.css"/>
+</head>
+<body>
+    <br>
+    <h1 id="myHeader">URL Generator for Sim Wheel Overlay</h1>
+    <div id="myform">
+        <form name="wheelInfo" oninput="op.value=window.location.href + '?' + myUrl.searchParams.toString()" onsubmit="return false">
+        
+            <label for="wt">Select a Wheel:</label><br>
+            <select style="width: 100px;" name="wt" id="wt" oninput="wheelInput()">
+                <optgroup label="Logitech Wheels">
+                    <option value="g27" >G27</option>
+                    <option value="g29">G29</option>
+                </optgroup>
+                <optgroup label="Thrustmaster Wheels">
+                    <option value="tm">TM 1</option>
+                </optgroup>
+            </select><br><br><br><br>
+    
+            <label for="rot">
+                Max Rotation (degrees):&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <i>(set this value to the maximum rotation of your wheel)</i>
+            </label>
+            <br>
+            <input type="range" id="rot" name="rot" value="180" min="90" max="900" oninput="rotval.value=rot.value;rotInput()">&nbsp;&nbsp;&nbsp;
+            <output name="rotval" for="rot">180</output><br><br><br>
+    
+            <label for="sloc">Shifter Location:</label><br>
+            <input type="radio" id="left" name="sloc" value="left" oninput="shifterInputLeft()">
+            <label for="left">Left</label><br>
+            <input type="radio" id="right" name="sloc" value="right" oninput="shifterInputRight()">
+            <label for="right">Right</label><br>
+            <input type="radio" id="none" name="sloc" value="none" oninput="shifterInputNone()">
+            <label for="none">None</label>
+
+            <div class="output">
+                <output name="op" id="op" for="wt rot sloc"></output>
+                
+            </div><br><br>
+    
+            
+            <button class="prevButton" onclick=" window.open(op.value,'_blank')">Preview in new tab</button>
+    
+            
+            
+        </form>
+
+        <!-- The button used to copy the text -->
+        <button class="copyStyle" onclick="getText()">Copy Link</button>
+
+
+
+        
+    </div>
+
+    <div id="wheelLocation" style="opacity: 0;">
+        <img id="wheel" src="./images/g27wheel.png" class="wheelStandard">
+        <img id="upShift" src="./images/button4.png" class="wheelButtons">
+        <img id="downShift" src="./images/button5.png" class="wheelButtons">
+        <img id="button7" src="./images/button7.png" class="wheelButtons">
+        <img id="button20" src="./images/button20.png" class="wheelButtons">
+        <img id="button22" src="./images/button22.png" class="wheelButtons">
+        <img id="button6" src="./images/button6.png" class="wheelButtons">
+        <img id="button19" src="./images/button19.png" class="wheelButtons">
+        <img id="button21" src="./images/button21.png" class="wheelButtons">
+        <img id="pedals" src="./images/pedals.png" class="Pedals">
+        <img id="gas" src="./images/gas.png" class="Gas">
+        <img id="brake" src="./images/brake.png" class="Brake">
+        <img id="clutch" src="./images/clutch.png" class="Clutch">
+        <img id="shifterBase" src="./images/shifterbase.png" class="shifterBase">
+        <img id="shifter" src="./images/shifter.png" class="Shifter">
+        <img id="button0" src="./images/button0.png" class="shifterButtons">
+        <img id="button1" src="./images/button1.png" class="shifterButtons">
+        <img id="button2" src="./images/button2.png" class="shifterButtons">
+        <img id="button3" src="./images/button3.png" class="shifterButtons">
+        <img id="button15" src="./images/button15.png" class="shifterButtons">
+        <img id="button16" src="./images/button16.png" class="shifterButtons">
+        <img id="button17" src="./images/button17.png" class="shifterButtons">
+        <img id="button18" src="./images/button18.png" class="shifterButtons">
+        <img id="arrow1" src="./images/arrow1.png" class="shifterButtons">
+        <img id="arrow2" src="./images/arrow2.png" class="shifterButtons">
+        <img id="arrow3" src="./images/arrow3.png" class="shifterButtons">
+        <img id="arrow4" src="./images/arrow4.png" class="shifterButtons">
+        <div id="gamepadInfo" style="position: absolute;top:900px;"></div>
+        <button id="exampleButton"; onclick="wheelLoading()" style="position: absolute;top:900px;left:470px;">Functionality Example</button>
+    </div>
+
+
+</body>
+</html>
