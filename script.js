@@ -1,9 +1,9 @@
 const myUrl = new URL(window.location.href);
 
 // op.innerHTML = window.location.href;
-window.onload = setTimeout(function () {
-    myUrl.searchParams.set('ss', 'ws');
-}, 100)
+// window.onload = setTimeout(function () {
+//     myUrl.searchParams.set('ss', 'ws');
+// }, 100)
 
 function wheelInput() {
     myUrl.searchParams.set('wt', document.forms['wheelInfo'].elements['wt'].value)
@@ -38,51 +38,29 @@ document.getElementById("wt").selectedIndex = -1;
 
 
 function swapStyleSheet(sheet) {
-    document.getElementById("pagestyle").setAttribute("href", sheet);  
-}
-
-
-if (myUrl.searchParams.get('ss') == "ws") {
-    console.log("stylesheet set to wheelstyle")
-    swapStyleSheet("wheelstyle.css")
+    document.getElementById("pagestyle").setAttribute("href", sheet);
     myform.style.opacity = "0";
     wheelLocation.style.opacity = "1";
-    myHeader.innerHTML = "";
-}
-if (myUrl.searchParams.get('sloc') == "right") {
-    shifterBase.className = "shifterBaseRight";
-    button0.className = "shifterButtonsRight";
-    button1.className = "shifterButtonsRight";
-    button2.className = "shifterButtonsRight";
-    button3.className = "shifterButtonsRight";
-    button15.className = "shifterButtonsRight";
-    button16.className = "shifterButtonsRight";
-    button17.className = "shifterButtonsRight";
-    button18.className = "shifterButtonsRight";
-    arrow1.className = "shifterButtonsRight";
-    arrow2.className = "shifterButtonsRight";
-    arrow3.className = "shifterButtonsRight";
-    arrow4.className = "shifterButtonsRight";
-    shifter.className = "ShifterRight";
-}
-if (myUrl.searchParams.get('sloc') == "none") {
-    shifterBase.style.opacity = "0";
-    button0.style.opacity = "0";
-    button1.style.opacity = "0";
-    button2.style.opacity = "0";
-    button3.style.opacity = "0";
-    button15.style.opacity = "0";
-    button16.style.opacity = "0";
-    button17.style.opacity = "0";
-    button18.style.opacity = "0";
-    arrow1.style.opacity = "0";
-    arrow2.style.opacity = "0";
-    arrow3.style.opacity = "0";
-    arrow4.style.opacity = "0";
-    shifter.style.opacity = "0";
-}
-if (myUrl.searchParams.get('wt') == "g29") {
-    wheel.src = "./images/g29wheel.png";
-    shifterBase.src = "./images/g29shifterbase.png"
+    myHeader.innerHTML = "";  
+    console.log("stylesheet set to " + sheet)
 }
 
+
+if (myUrl.searchParams.get('sloc') == "right") {
+    shiftArea.className = "shiftArea Right";
+}
+if (myUrl.searchParams.get('sloc') == "none") {
+    shiftArea.className = "shiftArea gone";
+}
+if (myUrl.searchParams.get('wt') == "g29") {
+    swapStyleSheet("g29style.css")
+}
+if (myUrl.searchParams.get('wt') == "g27") {
+    swapStyleSheet("g27style.css")
+}
+if (myUrl.searchParams.get('wt') == "t150") {
+    swapStyleSheet("t150style.css")
+}
+if (myUrl.searchParams.get('wt') == "g290") {
+    swapStyleSheet("g290style.css")
+}

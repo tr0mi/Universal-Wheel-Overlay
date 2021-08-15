@@ -12,7 +12,7 @@
 <body>
     <br>
     <h1 id="myHeader">URL Generator for Sim Wheel Overlay</h1>
-    <div id="myform">
+    <div id="myform" class="myFormBox">
         <form name="wheelInfo" oninput="op.value=window.location.href + '?' + myUrl.searchParams.toString()" onsubmit="return false">
         
             <label for="wt">Select a Wheel:</label><br>
@@ -20,19 +20,20 @@
                 <optgroup label="Logitech Wheels">
                     <option value="g27" >G27</option>
                     <option value="g29">G29</option>
+                    <option value="g290">G290</option>
                 </optgroup>
                 <optgroup label="Thrustmaster Wheels">
-                    <option value="tm">TM 1</option>
+                    <option value="t150">T-150</option>
                 </optgroup>
             </select><br><br><br><br>
     
             <label for="rot">
-                Max Rotation (degrees):&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <i>(set this value to the maximum rotation of your wheel)</i>
+                Max Rotation (degrees):
+                <div class="desc">(set this value to the maximum rotation of your wheel in a given direction. For a more precise value, modify the &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rot=(value) in your custom url.)</div>
             </label>
             <br>
-            <input type="range" id="rot" name="rot" value="180" min="90" max="900" oninput="rotval.value=rot.value;rotInput()">&nbsp;&nbsp;&nbsp;
-            <output name="rotval" for="rot">180</output><br><br><br>
+            <input type="range" style="position: relative;top: -60px;" id="rot" name="rot" value="180" min="90" max="450" oninput="rotval.value=rot.value;rotInput()">&nbsp;&nbsp;&nbsp;
+            <output name="rotval" style="position: relative;top: -60px;" for="rot">180</output><br><br>
     
             <label for="sloc">Shifter Location:</label><br>
             <input type="radio" id="left" name="sloc" value="left" oninput="shifterInputLeft()">
@@ -40,7 +41,7 @@
             <input type="radio" id="right" name="sloc" value="right" oninput="shifterInputRight()">
             <label for="right">Right</label><br>
             <input type="radio" id="none" name="sloc" value="none" oninput="shifterInputNone()">
-            <label for="none">None</label>
+            <label for="none">None</label><br><br><br><br>
 
             <div class="output">
                 <output name="op" id="op" for="wt rot sloc"></output>
@@ -62,34 +63,42 @@
         
     </div>
 
-    <div id="wheelLocation" style="opacity: 0;">
-        <img id="wheel" src="./images/g27wheel.png" class="wheelStandard">
-        <img id="upShift" src="./images/button4.png" class="wheelButtons">
-        <img id="downShift" src="./images/button5.png" class="wheelButtons">
-        <img id="button7" src="./images/button7.png" class="wheelButtons">
-        <img id="button20" src="./images/button20.png" class="wheelButtons">
-        <img id="button22" src="./images/button22.png" class="wheelButtons">
-        <img id="button6" src="./images/button6.png" class="wheelButtons">
-        <img id="button19" src="./images/button19.png" class="wheelButtons">
-        <img id="button21" src="./images/button21.png" class="wheelButtons">
-        <img id="pedals" src="./images/pedals.png" class="Pedals">
-        <img id="gas" src="./images/gas.png" class="Gas">
-        <img id="brake" src="./images/brake.png" class="Brake">
-        <img id="clutch" src="./images/clutch.png" class="Clutch">
-        <img id="shifterBase" src="./images/shifterbase.png" class="shifterBase">
-        <img id="shifter" src="./images/shifter.png" class="Shifter">
-        <img id="button0" src="./images/button0.png" class="shifterButtons">
-        <img id="button1" src="./images/button1.png" class="shifterButtons">
-        <img id="button2" src="./images/button2.png" class="shifterButtons">
-        <img id="button3" src="./images/button3.png" class="shifterButtons">
-        <img id="button15" src="./images/button15.png" class="shifterButtons">
-        <img id="button16" src="./images/button16.png" class="shifterButtons">
-        <img id="button17" src="./images/button17.png" class="shifterButtons">
-        <img id="button18" src="./images/button18.png" class="shifterButtons">
-        <img id="arrow1" src="./images/arrow1.png" class="shifterButtons">
-        <img id="arrow2" src="./images/arrow2.png" class="shifterButtons">
-        <img id="arrow3" src="./images/arrow3.png" class="shifterButtons">
-        <img id="arrow4" src="./images/arrow4.png" class="shifterButtons">
+    <div id="wheelLocation" style="opacity: 0">
+        <div id="wheelArea" class="wheelArea">
+            <div id="wheel" class="wheelStandard"></div>
+            <div id="upShift" class="wheelButtons upShift"></div>
+            <div id="downShift" class="wheelButtons downShift"></div>
+            <div id="button7" class="wheelButtons button7"></div>
+            <div id="button20" class="wheelButtons button20"></div>
+            <div id="button22" class="wheelButtons button22"></div>
+            <div id="button6" class="wheelButtons button6"></div>
+            <div id="button19" class="wheelButtons button19"></div>
+            <div id="button21" class="wheelButtons button21"></div>
+        </div>
+
+        <div id="pedals" class="Pedals">
+            <div id="gas" class="Pedal Gas"></div>  
+            <div id="brake" class="Pedal Brake"></div>
+            <div id="clutch" class="Pedal Clutch"></div>
+        </div>
+
+        <div id="shiftArea" class="shiftArea">
+            <div id="shifterBase" class="shifterBase"></div>
+            <div id="shifter" class="Shifter"></div>
+            <div id="button0" class="shifterButtons button0"></div>
+            <div id="button1" class="shifterButtons button1"></div>
+            <div id="button2" class="shifterButtons button2"></div>
+            <div id="button3" class="shifterButtons button3"></div>
+            <div id="button15" class="shifterButtons button15"></div>
+            <div id="button16" class="shifterButtons button16"></div>
+            <div id="button17" class="shifterButtons button17"></div>
+            <div id="button18" class="shifterButtons button18"></div>
+            <div id="arrow1" class="shifterButtons arrow1"></div>
+            <div id="arrow2" class="shifterButtons arrow2"></div>
+            <div id="arrow3" class="shifterButtons arrow3"></div>
+            <div id="arrow4" class="shifterButtons arrow4"></div>
+        </div>
+
         <div id="gamepadInfo" style="position: absolute;top:900px;"></div>
         <button id="exampleButton"; onclick="wheelLoading()" style="position: absolute;top:900px;left:470px;">Functionality Example</button>
     </div>

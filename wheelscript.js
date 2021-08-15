@@ -76,16 +76,7 @@ function gameLoop() {
   /////////////////////////////////////////// Wheel Rotation /////////////////////////////////////////////
   if (gp.axes[0] >= -1 || gp.axes[0] <= 1) {
     var wheelAngle = gp.axes[0] * wRot;
-    // wheelAxis0.innerHTML = wheelAngle;
-    wheel.style.transform = 'rotate(' + wheelAngle + 'deg)';
-    downShift.style.transform = 'rotate(' + wheelAngle + 'deg)';
-    upShift.style.transform = 'rotate(' + wheelAngle + 'deg)';
-    button7.style.transform = 'rotate(' + wheelAngle + 'deg)';
-    button20.style.transform = 'rotate(' + wheelAngle + 'deg)';
-    button22.style.transform = 'rotate(' + wheelAngle + 'deg)';
-    button6.style.transform = 'rotate(' + wheelAngle + 'deg)';
-    button19.style.transform = 'rotate(' + wheelAngle + 'deg)';
-    button21.style.transform = 'rotate(' + wheelAngle + 'deg)';
+    wheelArea.style.transform = 'rotate(' + wheelAngle + 'deg)';
   }
 
 
@@ -115,8 +106,8 @@ function gameLoop() {
     case buttonPressed(gp.buttons[11]): shifter.style.transform = 'translate(0px, 50px)'; shifter.style.transitionDuration = "100ms"; break;
     case buttonPressed(gp.buttons[12]): shifter.style.transform = 'translate(60px, -50px)'; shifter.style.transitionDuration = "100ms"; break;
     case buttonPressed(gp.buttons[13]): shifter.style.transform = 'translate(60px, 50px)'; shifter.style.transitionDuration = "100ms"; break;
-    case buttonPressed(gp.buttons[14]): shifter.style.transform = 'translate(60px, 50px)'; shifter.style.transitionDuration = "100ms"; shifter.style.width = '90px'; break;
-    default: shifter.style.transform = 'translate(0px, 0px)'; shifter.style.width = '120px'; shifter.style.transitionDuration = "300ms"; break;
+    case buttonPressed(gp.buttons[14]): shifter.style.transform = 'translate(60px, 50px)'; shifter.style.transitionDuration = "100ms"; shifter.style.backgroundSize = '90px'; break;
+    default: shifter.style.transform = 'translate(0px, 0px)'; shifter.style.backgroundSize = '120px'; shifter.style.transitionDuration = "300ms"; break;
   }
 
 
@@ -197,12 +188,12 @@ function wheelLoading() {
   setTimeout(function(){ button19.style.opacity = "0"; }, 4500);
   setTimeout(function(){ button21.style.opacity = "0"; }, 4600);
 
-  setTimeout(function(){ wheel.style.transitionDuration = "500ms"; }, 4800);
-  setTimeout(function(){ wheel.style.transform = 'rotate(' + -wRot + 'deg)'; }, 4800);
-  setTimeout(function(){ wheel.style.transform = 'rotate(0deg)'; }, 5500);
-  setTimeout(function(){ wheel.style.transform = 'rotate(' + wRot + 'deg)'; }, 6200);
-  setTimeout(function(){ wheel.style.transform = 'rotate(0deg)'; }, 6900);
-  setTimeout(function(){ wheel.style.transitionDuration = "0ms"; }, 7400);
+  setTimeout(function(){ wheelArea.style.transitionDuration = "500ms"; }, 4800);
+  setTimeout(function(){ wheelArea.style.transform = 'rotate(' + -wRot + 'deg)'; }, 4800);
+  setTimeout(function(){ wheelArea.style.transform = 'rotate(0deg)'; }, 5500);
+  setTimeout(function(){ wheelArea.style.transform = 'rotate(' + wRot + 'deg)'; }, 6200);
+  setTimeout(function(){ wheelArea.style.transform = 'rotate(0deg)'; }, 6900);
+  setTimeout(function(){ wheelArea.style.transitionDuration = "0ms"; }, 7400);
 
   setTimeout(function(){ gas.style.transitionDuration = "500ms"; }, 7500);
   setTimeout(function(){ gas.style.transform = 'translateY(100px)'; }, 7500);
@@ -227,10 +218,10 @@ function wheelLoading() {
   setTimeout(function(){ shifter.style.transform = 'translate(0px, 0px)'; }, 13000);
   setTimeout(function(){ shifter.style.transitionDuration = "100ms"; }, 13700);
   setTimeout(function(){ shifter.style.transform = 'translate(60px, 50px)'; }, 13700);
-  setTimeout(function(){ shifter.style.width = '90px'; }, 13700);
+  setTimeout(function(){ shifter.style.backgroundSize = '90px'; }, 13700);
   setTimeout(function(){ shifter.style.transitionDuration = "300ms"; }, 13900);
   setTimeout(function(){ shifter.style.transform = 'translate(0px, 0px)'; }, 14000);
-  setTimeout(function(){ shifter.style.width = '120px'; }, 14000);
+  setTimeout(function(){ shifter.style.backgroundSize = '120px'; }, 14000);
   
   setTimeout(function(){ clutch.style.transform = 'translateY(0px)'; }, 14500);
   setTimeout(function(){ clutch.style.transitionDuration = "0ms"; }, 15000);
