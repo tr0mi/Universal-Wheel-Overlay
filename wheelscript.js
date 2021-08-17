@@ -36,11 +36,154 @@ function pollGamepads() {
 }
 
 // dev info:
-
 // wheelAxis0 = document.getElementById("axisState0");
 // gasInfo = document.getElementById("gasInfo");
 // brakeInfo = document.getElementById("brakeInfo");
 // clutchInfo = document.getElementById("clutchInfo");
+
+/////////////////////////////////////////// Select Mapping //////////////////////////////////////////////
+var mappingButtons = new Array();
+var mappingAxes = new Array();
+
+
+/////////////// g27 mapping /////////////
+
+if (myUrl.searchParams.get('wt') == "g27") {
+  mappingButtons[0] = "sb0";
+  mappingButtons[1] = "sb1";
+  mappingButtons[2] = "sb2";
+  mappingButtons[3] = "sb3";
+  mappingButtons[4] = "ushift";
+  mappingButtons[5] = "dshift";
+  mappingButtons[6] = "circle";
+  mappingButtons[7] = "square";
+  mappingButtons[8] = "g1";
+  mappingButtons[9] = "g2";
+  mappingButtons[10] = "g3";
+  mappingButtons[11] = "g4";
+  mappingButtons[12] = "g5";
+  mappingButtons[13] = "g6";
+  mappingButtons[14] = "gr";
+  mappingButtons[15] = "striangle";
+  mappingButtons[16] = "ssquare";
+  mappingButtons[17] = "sx";
+  mappingButtons[18] = "scircle";
+  mappingButtons[19] = "r2";
+  mappingButtons[20] = "l2";
+  mappingButtons[21] = "r3";
+  mappingButtons[22] = "l3";
+
+  mappingAxes[0] = "wheel";
+  mappingAxes[1] = "";
+  mappingAxes[2] = "gas";
+  mappingAxes[3] = "";
+  mappingAxes[4] = "";
+  mappingAxes[5] = "brake";
+  mappingAxes[6] = "clutch";
+  mappingAxes[7] = "";
+  mappingAxes[8] = "";
+  mappingAxes[9] = "arrows";
+}
+else if (myUrl.searchParams.get('wt') == "g29" || myUrl.searchParams.get('wt') == "g923") { /////////////// g29 mapping /////////////
+  mappingButtons[0] = "x";
+  mappingButtons[1] = "square";
+  mappingButtons[2] = "circle";
+  mappingButtons[3] = "triangle";
+  mappingButtons[4] = "ushift";
+  mappingButtons[5] = "dshift";
+  mappingButtons[6] = "r2";
+  mappingButtons[7] = "l2";
+  mappingButtons[8] = "share";
+  mappingButtons[9] = "option";
+  mappingButtons[10] = "r3";
+  mappingButtons[11] = "l3";
+  mappingButtons[12] = "g1";
+  mappingButtons[13] = "g2";
+  mappingButtons[14] = "g3";
+  mappingButtons[15] = "g4";
+  mappingButtons[16] = "g5";
+  mappingButtons[17] = "g6";
+  mappingButtons[18] = "gr";
+  mappingButtons[19] = "plus";
+  mappingButtons[20] = "minus";
+  mappingButtons[21] = "dialright";
+  mappingButtons[22] = "dialleft";
+  mappingButtons[23] = "return";
+
+  mappingAxes[0] = "wheel";
+  mappingAxes[1] = "clutch";
+  mappingAxes[2] = "gas";
+  mappingAxes[3] = "";
+  mappingAxes[4] = "";
+  mappingAxes[5] = "brake";
+  mappingAxes[6] = "";
+  mappingAxes[7] = "";
+  mappingAxes[8] = "";
+  mappingAxes[9] = "arrows";
+}
+else if (myUrl.searchParams.get('wt') == "g920") { /////////////// g920 mapping /////////////
+  mappingButtons[0] = "x";
+  mappingButtons[1] = "square";
+  mappingButtons[2] = "circle";
+  mappingButtons[3] = "triangle";
+  mappingButtons[4] = "ushift";
+  mappingButtons[5] = "dshift";
+  mappingButtons[6] = "r2";
+  mappingButtons[7] = "l2";
+  mappingButtons[8] = "r3";
+  mappingButtons[9] = "l3";
+  mappingButtons[10] = "ps";
+  mappingButtons[11] = "gr";
+  mappingButtons[12] = "g1";
+  mappingButtons[13] = "g2";
+  mappingButtons[14] = "g3";
+  mappingButtons[15] = "g4";
+  mappingButtons[16] = "g5";
+  mappingButtons[17] = "g6";
+
+  mappingAxes[0] = "wheel";
+  mappingAxes[1] = "gas";
+  mappingAxes[2] = "brake";
+  mappingAxes[3] = "";
+  mappingAxes[4] = "";
+  mappingAxes[5] = "clutch";
+  mappingAxes[6] = "";
+  mappingAxes[7] = "";
+  mappingAxes[8] = "";
+  mappingAxes[9] = "arrows";
+}
+else if (myUrl.searchParams.get('wt') == "t150") { /////////////// t150 mapping /////////////
+  mappingButtons[0] = "dshift";
+  mappingButtons[1] = "ushift";
+  mappingButtons[2] = "triangle";
+  mappingButtons[3] = "square";
+  mappingButtons[4] = "circle";
+  mappingButtons[5] = "x";
+  mappingButtons[6] = "l3";
+  mappingButtons[7] = "r3";
+  mappingButtons[8] = "r2";
+  mappingButtons[9] = "l2";
+  mappingButtons[10] = "sb0";
+  mappingButtons[11] = "sb1";
+  mappingButtons[12] = "ps";
+  mappingButtons[13] = "g2";
+  mappingButtons[14] = "g3";
+  mappingButtons[15] = "g4";
+  mappingButtons[16] = "g5";
+  mappingButtons[17] = "g6";
+
+  mappingAxes[0] = "wheel";
+  mappingAxes[1] = "gas";
+  mappingAxes[2] = "brake";
+  mappingAxes[3] = "";
+  mappingAxes[4] = "";
+  mappingAxes[5] = "clutch";
+  mappingAxes[6] = "";
+  mappingAxes[7] = "";
+  mappingAxes[8] = "";
+  mappingAxes[9] = "arrows";
+}
+
 
 
 ////////////////////////////
@@ -63,36 +206,41 @@ function gameLoop() {
   var gp = gamepads[0];
 
   /////////////////////////////////////////// Wheel Buttons //////////////////////////////////////////////
-  if (buttonPressed(gp.buttons[5])) {downShift.style.opacity = "1";} else {downShift.style.opacity = "0";}
-  if (buttonPressed(gp.buttons[4])) {upShift.style.opacity = "1";} else {upShift.style.opacity = "0";}
-  if (buttonPressed(gp.buttons[7])) {button7.style.opacity = "1";} else {button7.style.opacity = "0";}
-  if (buttonPressed(gp.buttons[20])) {button20.style.opacity = "1";} else {button20.style.opacity = "0";}
-  if (buttonPressed(gp.buttons[22])) {button22.style.opacity = "1";} else {button22.style.opacity = "0";}
-  if (buttonPressed(gp.buttons[6])) {button6.style.opacity = "1";} else {button6.style.opacity = "0";}
-  if (buttonPressed(gp.buttons[19])) {button19.style.opacity = "1";} else {button19.style.opacity = "0";}
-  if (buttonPressed(gp.buttons[21])) {button21.style.opacity = "1";} else {button21.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('dshift')])) {downShift.style.opacity = "1";} else {downShift.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('ushift')])) {upShift.style.opacity = "1";} else {upShift.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('x')])) {x.style.opacity = "1";} else {x.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('square')])) {square.style.opacity = "1";} else {square.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('triangle')])) {triangle.style.opacity = "1";} else {triangle.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('circle')])) {circle.style.opacity = "1";} else {circle.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('l2')])) {l2.style.opacity = "1";} else {l2.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('l3')])) {l3.style.opacity = "1";} else {l3.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('r2')])) {r2.style.opacity = "1";} else {r2.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('r3')])) {r3.style.opacity = "1";} else {r3.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('plus')])) {plus.style.opacity = "1";} else {plus.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('minus')])) {minus.style.opacity = "1";} else {minus.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('return')])) {returnBut.style.opacity = "1";} else {returnBut.style.opacity = "0";}
 
 
   /////////////////////////////////////////// Wheel Rotation /////////////////////////////////////////////
-  if (gp.axes[0] >= -1 || gp.axes[0] <= 1) {
+  if (gp.axes[mappingAxes.indexOf('wheel')] >= -1 || gp.axes[mappingAxes.indexOf('wheel')] <= 1) {
     var wheelAngle = gp.axes[0] * wRot;
     wheelArea.style.transform = 'rotate(' + wheelAngle + 'deg)';
   }
 
 
   /////////////////////////////////////////// Pedals /////////////////////////////////////////////
-  if (gp.axes[2] >= -1 || gp.axes[2] <= 1) {
-    var gasPos = (gp.axes[2] - 1) * -50;
+  if (gp.axes[mappingAxes.indexOf('gas')] >= -1 || gp.axes[mappingAxes.indexOf('gas')] <= 1) {
+    var gasPos = (gp.axes[mappingAxes.indexOf('gas')] - 1) * -50;
     // gasInfo.innerHTML = gasPos;
     gas.style.transform = 'translateY(' + gasPos + 'px)';
   }
-  if (gp.axes[5] >= -1 || gp.axes[5] <= 1) {
-    var brakePos = (gp.axes[5] - 1) * -50;
+  if (gp.axes[mappingAxes.indexOf('brake')] >= -1 || gp.axes[mappingAxes.indexOf('brake')] <= 1) {
+    var brakePos = (gp.axes[mappingAxes.indexOf('brake')] - 1) * -50;
     // brakeInfo.innerHTML = brakePos;
     brake.style.transform = 'translateY(' + brakePos + 'px)';
   }
-  if (gp.axes[6] >= -1 || gp.axes[6] <= 1) {
-    var clutchPos = (gp.axes[6] - 1) * -50;
+  if (gp.axes[mappingAxes.indexOf('clutch')] >= -1 || gp.axes[mappingAxes.indexOf('clutch')] <= 1) {
+    var clutchPos = (gp.axes[mappingAxes.indexOf('clutch')] - 1) * -50;
     // clutchInfo.innerHTML = clutchPos;
     clutch.style.transform = 'translateY(' + clutchPos + 'px)';
   }
@@ -100,37 +248,37 @@ function gameLoop() {
 
   /////////////////////////////////////////// Shifter Gears /////////////////////////////////////////////
   switch(true){
-    case buttonPressed(gp.buttons[8]): shifter.style.transform = 'translate(-60px, -50px)'; shifter.style.transitionDuration = "100ms"; break;
-    case buttonPressed(gp.buttons[9]): shifter.style.transform = 'translate(-60px, 50px)'; shifter.style.transitionDuration = "100ms"; break;
-    case buttonPressed(gp.buttons[10]): shifter.style.transform = 'translate(0px, -50px)'; shifter.style.transitionDuration = "100ms"; break;
-    case buttonPressed(gp.buttons[11]): shifter.style.transform = 'translate(0px, 50px)'; shifter.style.transitionDuration = "100ms"; break;
-    case buttonPressed(gp.buttons[12]): shifter.style.transform = 'translate(60px, -50px)'; shifter.style.transitionDuration = "100ms"; break;
-    case buttonPressed(gp.buttons[13]): shifter.style.transform = 'translate(60px, 50px)'; shifter.style.transitionDuration = "100ms"; break;
-    case buttonPressed(gp.buttons[14]): shifter.style.transform = 'translate(60px, 50px)'; shifter.style.transitionDuration = "100ms"; shifter.style.backgroundSize = '90px'; break;
+    case buttonPressed(gp.buttons[mappingButtons.indexOf('g1')]): shifter.style.transform = 'translate(-60px, -50px)'; shifter.style.transitionDuration = "100ms"; break;
+    case buttonPressed(gp.buttons[mappingButtons.indexOf('g2')]): shifter.style.transform = 'translate(-60px, 50px)'; shifter.style.transitionDuration = "100ms"; break;
+    case buttonPressed(gp.buttons[mappingButtons.indexOf('g3')]): shifter.style.transform = 'translate(0px, -50px)'; shifter.style.transitionDuration = "100ms"; break;
+    case buttonPressed(gp.buttons[mappingButtons.indexOf('g4')]): shifter.style.transform = 'translate(0px, 50px)'; shifter.style.transitionDuration = "100ms"; break;
+    case buttonPressed(gp.buttons[mappingButtons.indexOf('g5')]): shifter.style.transform = 'translate(60px, -50px)'; shifter.style.transitionDuration = "100ms"; break;
+    case buttonPressed(gp.buttons[mappingButtons.indexOf('g6')]): shifter.style.transform = 'translate(60px, 50px)'; shifter.style.transitionDuration = "100ms"; break;
+    case buttonPressed(gp.buttons[mappingButtons.indexOf('gr')]): shifter.style.transform = 'translate(60px, 50px)'; shifter.style.transitionDuration = "100ms"; shifter.style.backgroundSize = '90px'; break;
     default: shifter.style.transform = 'translate(0px, 0px)'; shifter.style.backgroundSize = '120px'; shifter.style.transitionDuration = "300ms"; break;
   }
 
 
   /////////////////////////////////////////// Shifter Buttons /////////////////////////////////////////////  
-  if (buttonPressed(gp.buttons[0])) {button0.style.opacity = "1";} else {button0.style.opacity = "0";}
-  if (buttonPressed(gp.buttons[1])) {button1.style.opacity = "1";} else {button1.style.opacity = "0";}
-  if (buttonPressed(gp.buttons[2])) {button2.style.opacity = "1";} else {button2.style.opacity = "0";}
-  if (buttonPressed(gp.buttons[3])) {button3.style.opacity = "1";} else {button3.style.opacity = "0";}
-  if (buttonPressed(gp.buttons[15])) {button15.style.opacity = "1";} else {button15.style.opacity = "0";}
-  if (buttonPressed(gp.buttons[16])) {button16.style.opacity = "1";} else {button16.style.opacity = "0";}
-  if (buttonPressed(gp.buttons[17])) {button17.style.opacity = "1";} else {button17.style.opacity = "0";}
-  if (buttonPressed(gp.buttons[18])) {button18.style.opacity = "1";} else {button18.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('sb0')])) {button0.style.opacity = "1";} else {button0.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('sb1')])) {button1.style.opacity = "1";} else {button1.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('sb2')])) {button2.style.opacity = "1";} else {button2.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('sb3')])) {button3.style.opacity = "1";} else {button3.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('striangle')])) {striangle.style.opacity = "1";} else {striangle.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('ssquare')])) {ssquare.style.opacity = "1";} else {ssquare.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('sx')])) {sx.style.opacity = "1";} else {sx.style.opacity = "0";}
+  if (buttonPressed(gp.buttons[mappingButtons.indexOf('scircle')])) {scircle.style.opacity = "1";} else {scircle.style.opacity = "0";}
 
 
   /////////////////////////////////////////// Shifter D-pad /////////////////////////////////////////////  
-  var arrowVal = Math.floor(gp.axes[9] * 100);
+  var arrowVal = Math.floor(gp.axes[mappingAxes.indexOf('arrows')] * 100);
 
   switch(arrowVal) {
-    case -100: arrow1.style.opacity = "1"; break;
-    case 71: arrow2.style.opacity = "1"; break;
-    case 14: arrow3.style.opacity = "1"; break;
-    case -43: arrow4.style.opacity = "1"; break;
-    default: arrow1.style.opacity = "0"; arrow2.style.opacity = "0"; arrow3.style.opacity = "0"; arrow4.style.opacity = "0"; break;
+    case -100: arrow1.style.opacity = "1"; wup.style.opacity = "1"; break;
+    case 71: arrow2.style.opacity = "1"; wleft.style.opacity = "1"; break;
+    case 14: arrow3.style.opacity = "1"; wdown.style.opacity = "1"; break;
+    case -43: arrow4.style.opacity = "1"; wright.style.opacity = "1"; break;
+    default: arrow1.style.opacity = "0"; arrow2.style.opacity = "0"; arrow3.style.opacity = "0"; arrow4.style.opacity = "0";  wup.style.opacity = "0"; wleft.style.opacity = "0"; wdown.style.opacity = "0"; wright.style.opacity = "0"; break;
   }
 
   start = requestAnimationFrame(gameLoop);
@@ -156,37 +304,37 @@ function wheelLoading() {
   setTimeout(function(){ arrow2.style.opacity = "0"; }, 1400);
   setTimeout(function(){ arrow3.style.opacity = "0"; }, 1500);
   setTimeout(function(){ arrow4.style.opacity = "0"; }, 1600);
-  setTimeout(function(){ button15.style.opacity = "1"; }, 1700);
-  setTimeout(function(){ button16.style.opacity = "1"; }, 1800);
-  setTimeout(function(){ button17.style.opacity = "1"; }, 1900);
-  setTimeout(function(){ button18.style.opacity = "1"; }, 2000);
-  setTimeout(function(){ button15.style.opacity = "0"; }, 2100);
-  setTimeout(function(){ button16.style.opacity = "0"; }, 2200);
-  setTimeout(function(){ button17.style.opacity = "0"; }, 2300);
-  setTimeout(function(){ button18.style.opacity = "0"; }, 2400);
+  setTimeout(function(){ striangle.style.opacity = "1"; }, 1700);
+  setTimeout(function(){ ssquare.style.opacity = "1"; }, 1800);
+  setTimeout(function(){ sx.style.opacity = "1"; }, 1900);
+  setTimeout(function(){ scircle.style.opacity = "1"; }, 2000);
+  setTimeout(function(){ striangle.style.opacity = "0"; }, 2100);
+  setTimeout(function(){ ssquare.style.opacity = "0"; }, 2200);
+  setTimeout(function(){ sx.style.opacity = "0"; }, 2300);
+  setTimeout(function(){ scircle.style.opacity = "0"; }, 2400);
 
   setTimeout(function(){ downShift.style.opacity = "1"; }, 2500);
   setTimeout(function(){ downShift.style.opacity = "0"; }, 2800);
   setTimeout(function(){ upShift.style.opacity = "1"; }, 3000);
   setTimeout(function(){ upShift.style.opacity = "0"; }, 3300);
 
-  setTimeout(function(){ button7.style.opacity = "1"; }, 3500);
-  setTimeout(function(){ button20.style.opacity = "1"; }, 3600);
-  setTimeout(function(){ button22.style.opacity = "1"; }, 3700);
+  setTimeout(function(){ x.style.opacity = "1"; }, 3500);
+  setTimeout(function(){ square.style.opacity = "1"; }, 3600);
+  setTimeout(function(){ triangle.style.opacity = "1"; }, 3700);
 
   
-  setTimeout(function(){ button7.style.opacity = "0"; }, 3800);
-  setTimeout(function(){ button20.style.opacity = "0"; }, 3900);
-  setTimeout(function(){ button22.style.opacity = "0"; }, 4000);
+  setTimeout(function(){ x.style.opacity = "0"; }, 3800);
+  setTimeout(function(){ square.style.opacity = "0"; }, 3900);
+  setTimeout(function(){ triangle.style.opacity = "0"; }, 4000);
 
-  setTimeout(function(){ button6.style.opacity = "1"; }, 4100);
-  setTimeout(function(){ button19.style.opacity = "1"; }, 4200);
-  setTimeout(function(){ button21.style.opacity = "1"; }, 4300);
+  setTimeout(function(){ circle.style.opacity = "1"; }, 4100);
+  setTimeout(function(){ l2.style.opacity = "1"; }, 4200);
+  setTimeout(function(){ l3.style.opacity = "1"; }, 4300);
 
   
-  setTimeout(function(){ button6.style.opacity = "0"; }, 4400);
-  setTimeout(function(){ button19.style.opacity = "0"; }, 4500);
-  setTimeout(function(){ button21.style.opacity = "0"; }, 4600);
+  setTimeout(function(){ circle.style.opacity = "0"; }, 4400);
+  setTimeout(function(){ l2.style.opacity = "0"; }, 4500);
+  setTimeout(function(){ l3.style.opacity = "0"; }, 4600);
 
   setTimeout(function(){ wheelArea.style.transitionDuration = "500ms"; }, 4800);
   setTimeout(function(){ wheelArea.style.transform = 'rotate(' + -wRot + 'deg)'; }, 4800);
