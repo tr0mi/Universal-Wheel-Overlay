@@ -61,6 +61,9 @@ if (myUrl.searchParams.get('wt') == "g27") {
 if (myUrl.searchParams.get('wt') == "t150") {
     swapStyleSheet("t150style.css")
 }
-if (myUrl.searchParams.get('wt') == "g290") {
-    swapStyleSheet("g290style.css")
+if (myUrl.searchParams.get('wt') == "g920") {
+    swapStyleSheet("g920style.css")
+}
+if (myUrl.searchParams.get('wt') == "g923") {
+    swapStyleSheet("g923style.css")
 }

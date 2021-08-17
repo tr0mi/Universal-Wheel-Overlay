@@ -55,23 +55,50 @@ button:hover {
 .wheelButtons.downShift {
   background-image: url(./assets/g29/g29shiftleft.png);
 }
-.wheelButtons.button7 {
+.wheelButtons.x {
   background-image: url(./assets/g29/g29x.png);
 }
-.wheelButtons.button20 {
+.wheelButtons.square {
   background-image: url(./assets/g29/g29square.png);
 }
-.wheelButtons.button22 {
+.wheelButtons.triangle {
   background-image: url(./assets/g29/g29triangle.png);
 }
-.wheelButtons.button6 {
+.wheelButtons.circle {
   background-image: url(./assets/g29/g29circle.png);
 }
-.wheelButtons.button19 {
-  background-image: url(./assets/g27/button19.png);
+.wheelButtons.l2 {
+  background-image: url(./assets/g29/l2.png);
 }
-.wheelButtons.button21 {
-  background-image: url(./assets/g27/button21.png);
+.wheelButtons.r2 {
+  background-image: url(./assets/g29/r2.png);
+}
+.wheelButtons.l3 {
+  background-image: url(./assets/g29/l3.png);
+}
+.wheelButtons.r3 {
+  background-image: url(./assets/g29/r3.png);
+}
+.wheelButtons.plus {
+  background-image: url(./assets/g29/plus.png);
+}
+.wheelButtons.minus {
+  background-image: url(./assets/g29/minus.png);
+}
+.wheelButtons.returnBut {
+  background-image: url(./assets/g29/returnBut.png);
+}
+.wheelButtons.wup {
+  background-image: url(./assets/g29/up.png);
+}
+.wheelButtons.wdown {
+  background-image: url(./assets/g29/down.png);
+}
+.wheelButtons.wleft {
+  background-image: url(./assets/g29/left.png);
+}
+.wheelButtons.wright {
+  background-image: url(./assets/g29/right.png);
 }
 .Pedals {
   position: absolute;
@@ -144,42 +171,6 @@ button:hover {
   background-image: url(./assets/g27/shifter.png);
   background-size: 120px;
   transition-duration: 300ms;
-}
-.shifterButtons.button0 {
-  background-image: url(./assets/g27/button0.png);
-}
-.shifterButtons.button1 {
-  background-image: url(./assets/g27/button1.png);
-}
-.shifterButtons.button2 {
-  background-image: url(./assets/g27/button2.png);
-}
-.shifterButtons.button3 {
-  background-image: url(./assets/g27/button3.png);
-}
-.shifterButtons.button15 {
-  background-image: url(./assets/g27/button15.png);
-}
-.shifterButtons.button16 {
-  background-image: url(./assets/g27/button16.png);
-}
-.shifterButtons.button17 {
-  background-image: url(./assets/g27/button17.png);
-}
-.shifterButtons.button18 {
-  background-image: url(./assets/g27/button18.png);
-}
-.shifterButtons.arrow1 {
-  background-image: url(./assets/g27/arrow1.png);
-}
-.shifterButtons.arrow2 {
-  background-image: url(./assets/g27/arrow2.png);
-}
-.shifterButtons.arrow3 {
-  background-image: url(./assets/g27/arrow3.png);
-}
-.shifterButtons.arrow4 {
-  background-image: url(./assets/g27/arrow4.png);
 }
 .gone {
   opacity: 0;
