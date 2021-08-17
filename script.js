@@ -38,9 +38,9 @@ document.getElementById("wt").selectedIndex = -1;
 
 function swapStyleSheet(sheet) {
     document.getElementById("pagestyle").setAttribute("href", sheet);
-    myform.style.opacity = "0";
+    myform.style.display = "none";
     wheelLocation.style.opacity = "1";
-    myHeader.innerHTML = "";  
+    myCal.style.display = "none";
     console.log("stylesheet set to " + sheet)
 }
 
@@ -76,3 +76,18 @@ if (myUrl.searchParams.get('wt') == null && myUrl.searchParams.get('sloc') != nu
 else if (myUrl.searchParams.get('wt') == null && myUrl.searchParams.get('rot') != null) {
     window.location.replace("https://tr0mi.github.io/Universal-Wheel-Overlay/"); 
 }
+
+function outputBox() {
+    linkOutput.style.height = "auto";
+}
+
+function checkCustom() {
+    if (document.forms['wheelInfo'].elements['wt'].value == 'custom-overlay') {
+        myCal.style.display = "block";
+    }
+    else {
+        myCal.style.display = "none";
+    }
+    
+}
+

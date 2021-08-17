@@ -11,61 +11,66 @@
     <link rel="icon" href="./assets/g27/g27wheel.png">
 </head>
 <body>
-    <br>
-    <h1 id="myHeader">URL Generator for Sim Wheel Overlay</h1>
-    <div id="myform" class="myFormBox">
-        <form name="wheelInfo" oninput="op.value=window.location.href + '?' + myUrl.searchParams.toString()" onsubmit="return false">
+    <div id="myform" class="mainContainer">
+        <h1 id="myHeader">URL Generator for Sim Wheel Overlay</h1>
+        <form name="wheelInfo" oninput="op.value=window.location.href + '?' + myUrl.searchParams.toString();outputBox()" onsubmit="return false">
+            <div id="formContainer" class="myFormBox">
+                <label for="wt">Select a Wheel:</label><br>
+                <select style="width: 180px;" name="wt" id="wt" oninput="wheelInput();checkCustom()">
+                    <optgroup label="Logitech Wheels">
+                        <option value="g27" >G27</option>
+                        <option value="g29">G29</option>
+                        <option value="g920">G920</option>
+                        <option value="g923">G923</option>
+                    </optgroup>
+                    <optgroup label="Thrustmaster Wheels">
+                        <option value="t150">T-150</option>
+                        <option value="t300">T-300</option>
+                    </optgroup>
+                    <optgroup label="Don't see your wheel here?">
+                        <option value="custom-overlay">Create Custom Overlay</option>
+                    </optgroup>
+                </select><br><br><br>
         
-            <label for="wt">Select a Wheel:</label><br>
-            <select style="width: 100px;" name="wt" id="wt" oninput="wheelInput()">
-                <optgroup label="Logitech Wheels">
-                    <option value="g27" >G27</option>
-                    <option value="g29">G29</option>
-                    <option value="g920">G920</option>
-                    <option value="g923">G923</option>
-                </optgroup>
-                <optgroup label="Thrustmaster Wheels">
-                    <option value="t150">T-150</option>
-                    <option value="t300">T-300</option>
-                </optgroup>
-            </select><br><br><br><br>
+                <label for="rot">
+                    Max Rotation (degrees):
+                    <div class="desc">Set this value to the maximum rotation of your wheel in a given direction. For a more precise value, modify the <i>rot=(value)</i> in your custom url.</div>
+                </label>
+                <input type="range" style="position: relative;top: -60px;" id="rot" name="rot" value="180" min="90" max="540" oninput="rotval.value=rot.value;rotInput()">&nbsp;&nbsp;&nbsp;
+                <output name="rotval" style="position: relative;top: -60px;" for="rot">180</output><br>
+        
+                <label for="sloc">Shifter Location:</label><br>
+                <input type="radio" id="left" name="sloc" value="left" oninput="shifterInputLeft()">
+                <label for="left">Left</label><br>
+                <input type="radio" id="right" name="sloc" value="right" oninput="shifterInputRight()">
+                <label for="right">Right</label><br>
+                <input type="radio" id="none" name="sloc" value="none" oninput="shifterInputNone()">
+                <label for="none">None</label><br><br><br>
     
-            <label for="rot">
-                Max Rotation (degrees):
-                <div class="desc">(set this value to the maximum rotation of your wheel in a given direction. For a more precise value, modify the &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rot=(value) in your custom url.)</div>
-            </label>
-            <br>
-            <input type="range" style="position: relative;top: -60px;" id="rot" name="rot" value="180" min="90" max="450" oninput="rotval.value=rot.value;rotInput()">&nbsp;&nbsp;&nbsp;
-            <output name="rotval" style="position: relative;top: -60px;" for="rot">180</output><br><br>
-    
-            <label for="sloc">Shifter Location:</label><br>
-            <input type="radio" id="left" name="sloc" value="left" oninput="shifterInputLeft()">
-            <label for="left">Left</label><br>
-            <input type="radio" id="right" name="sloc" value="right" oninput="shifterInputRight()">
-            <label for="right">Right</label><br>
-            <input type="radio" id="none" name="sloc" value="none" oninput="shifterInputNone()">
-            <label for="none">None</label><br><br><br><br>
-
-            <div class="output">
-                <output name="op" id="op" for="wt rot sloc"></output>
+                <div id="linkOutput" class="output">
+                    <output name="op" id="op" for="wt rot sloc">Your Custom Link</output>
+                </div>
+                <button id="copyButton" class="copyStyle" onclick="getText()">Copy Link</button>
                 
-            </div><br><br>
-    
+                
+                
+            </div>
+
             
-            <button class="prevButton" onclick="window.open(op.value,'_blank')">Preview in new tab</button>
     
-            
+        <button id="prevButton" class="prevButton" onclick="window.open(op.value,'_blank')">Preview in new tab</button>    
             
         </form>
 
         <!-- The button used to copy the text -->
-        <button class="copyStyle" onclick="getText()">Copy Link</button>
-
+        <!-- <button id="copyButton" class="copyStyle" onclick="getText()">Copy Link</button> -->
+        
 
 
         
     </div>
-
+    <div id="myCal" class="calStyle">Calibration</div>
+    
     <div id="wheelLocation" style="opacity: 0">
         <div id="wheelArea" class="wheelArea">
             <div id="wheel" class="wheelStandard"></div>
