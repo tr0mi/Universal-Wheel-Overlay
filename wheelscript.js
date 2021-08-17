@@ -253,7 +253,7 @@ function gameLoop() {
 
   /////////////////////////////////////////// Wheel Rotation /////////////////////////////////////////////
   if (gp.axes[mappingAxes.indexOf('wheel')] >= -1 || gp.axes[mappingAxes.indexOf('wheel')] <= 1) {
-    var wheelAngle = gp.axes[0] * wRot;
+    var wheelAngle = gp.axes[mappingAxes.indexOf('wheel')] * wRot;
     wheelArea.style.transform = 'rotate(' + wheelAngle + 'deg)';
   }
 

@@ -26,7 +26,6 @@ function shifterInputNone() {
     console.log("new params: " + myUrl.searchParams.toString())
 }
 
-
 function getText() {
     var copyText = document.forms['wheelInfo'].elements['op'].value;
     console.log(copyText);
@@ -69,4 +68,11 @@ if (myUrl.searchParams.get('wt') == "g920") {
 }
 if (myUrl.searchParams.get('wt') == "g923") {
     swapStyleSheet("g923style.css")
+}
+
+if (myUrl.searchParams.get('wt') == null && myUrl.searchParams.get('sloc') != null) {
+    window.location.replace("https://tr0mi.github.io/Universal-Wheel-Overlay/"); 
+}
+else if (myUrl.searchParams.get('wt') == null && myUrl.searchParams.get('rot') != null) {
+    window.location.replace("https://tr0mi.github.io/Universal-Wheel-Overlay/"); 
 }
