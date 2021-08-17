@@ -173,17 +173,47 @@ else if (myUrl.searchParams.get('wt') == "t150") { /////////////// t150 mapping 
   mappingButtons[17] = "g6";
 
   mappingAxes[0] = "wheel";
-  mappingAxes[1] = "gas";
-  mappingAxes[2] = "brake";
+  mappingAxes[1] = "";
+  mappingAxes[2] = "";
   mappingAxes[3] = "";
-  mappingAxes[4] = "";
-  mappingAxes[5] = "clutch";
-  mappingAxes[6] = "";
+  mappingAxes[4] = "brake";
+  mappingAxes[5] = "gas";
+  mappingAxes[6] = "clutch";
   mappingAxes[7] = "";
   mappingAxes[8] = "";
   mappingAxes[9] = "arrows";
 }
+else if (myUrl.searchParams.get('wt') == "t300") { /////////////// t300 mapping /////////////
+  mappingButtons[0] = "dshift";
+  mappingButtons[1] = "ushift";
+  mappingButtons[2] = "triangle";
+  mappingButtons[3] = "square";
+  mappingButtons[4] = "circle";
+  mappingButtons[5] = "x";
+  mappingButtons[6] = "l3";
+  mappingButtons[7] = "r3";
+  mappingButtons[8] = "r2";
+  mappingButtons[9] = "l2";
+  mappingButtons[10] = "sb0";
+  mappingButtons[11] = "sb1";
+  mappingButtons[12] = "ps";
+  mappingButtons[13] = "g2";
+  mappingButtons[14] = "g3";
+  mappingButtons[15] = "g4";
+  mappingButtons[16] = "g5";
+  mappingButtons[17] = "g6";
 
+  mappingAxes[0] = "wheel";
+  mappingAxes[1] = "brake";
+  mappingAxes[2] = "";
+  mappingAxes[3] = "";
+  mappingAxes[4] = "";
+  mappingAxes[5] = "gas";
+  mappingAxes[6] = "clutch";
+  mappingAxes[7] = "";
+  mappingAxes[8] = "";
+  mappingAxes[9] = "arrows";
+}
 
 
 ////////////////////////////
@@ -270,7 +300,7 @@ function gameLoop() {
   if (buttonPressed(gp.buttons[mappingButtons.indexOf('scircle')])) {scircle.style.opacity = "1";} else {scircle.style.opacity = "0";}
 
 
-  /////////////////////////////////////////// Shifter D-pad /////////////////////////////////////////////  
+  /////////////////////////////////////////// D-pad /////////////////////////////////////////////  
   var arrowVal = Math.floor(gp.axes[mappingAxes.indexOf('arrows')] * 100);
 
   switch(arrowVal) {
