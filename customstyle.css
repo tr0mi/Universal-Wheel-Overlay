@@ -27,26 +27,21 @@ button:hover {
   position: absolute;
   background-size: 500px 500px;
   background-repeat: no-repeat;
-  left: 280px;
+  left: 300px;
   top: 0px;
-  height: 540px;
-  width: 540px;
+  height: 500px;
+  width: 500px;
 }
-.wheelStandard {
-  position: absolute;
+.wheelArea.wheelStandard {
   background-image: url(./assets/default/wheel.png);
-  background-size: cover;
-  top: 0px;
-  background-repeat: no-repeat;
-  height: 540px;
-  width: 540px;
+  left: 0px;
 }
 .wheelButtons {
   position: absolute;
-  background-size: cover;
+  background-size: 500px 500px;
   background-repeat: no-repeat;
-  height: 540px;
-  width: 540px;
+  height: 500px;
+  width: 500px;
   opacity: 0;
 }
 .wheelButtons.upShift {

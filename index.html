@@ -78,14 +78,98 @@
             <div id="myCalHeader" style="font-size:xx-large;">Connect your wheel and refresh page to continue</div><br>
             <div id="myCalMain" style="top: 130px;position: absolute;font-size: smaller;"></div>
             <div id="myCalSecond" style="top: 170px;position: absolute;font-size: smaller;opacity: 0.8;"></div>
-            <div id="myCalPreview" style="position: absolute;left: -345px;top: -90px;"> 
+            <div id="myCalPreview" style="position: absolute;left: -300px;top: -90px;"> 
                 <object id="dSource2" type="text/html" width="1000px" height="900px" style="transform: scale(0.35);">
                 </object>
              </div>
-            <div id="myCalInfo" style="position:absolute;top:500px;font-size: smaller;"></div>
+            <div id="myCalInfo" style="position:absolute;top:505px;font-size: smaller;"></div>
             <div id="buttonPressTitle" style="position:absolute;top: 90px;color: black;color: rgba(0, 0, 90, 0.842);opacity: 0;"></div>
             <div id="axisPressTitle" style="position:absolute;top: 110px;color: black;color: rgba(0, 0, 90, 0.842);opacity: 0;"></div>
-            <button onclick="endCal()" class="doneStyle">Done</button>
+            <button onclick="endCal()" class="doneStyle">Finish Calibration</button>
+        </div>
+
+        <div id="postCal" class="postCalStyle">
+            <div id="postCalMain" style="font-size: x-large;">Your button layout is:</div><br><br>
+            <div id="prevwheel"></div>
+            <div id="prevgas"></div>
+            <div id="prevbrake"></div>
+            <div id="prevclutch"></div>
+            <div id="prevdshift"></div>
+            <div id="prevushift"></div>
+            <div id="prevx"></div>
+            <div id="prevsquare"></div>
+            <div id="prevcircle"></div>
+            <div id="prevtriangle"></div>
+            <div id="prevl2"></div>
+            <div id="prevr2"></div>
+            <div id="prevl3"></div>
+            <div id="prevr3"></div><br><br>
+            <form name="skinForm" onsubmit="return false">
+                <label for="wt">Would you like to use a preset skin, or upload your own?</label><br>
+                <select style="width: 180px;" name="skinType" id="skinType" oninput="checkSkinOption()">
+                    <optgroup label="Upload Custom Images">
+                        <option value="upload-own">Upload your own</option>
+                    </optgroup>
+                    <optgroup label="Logitech Wheels">
+                        <option value="g27" >G27</option>
+                        <option value="g29">G29</option>
+                        <option value="g920">G920</option>
+                        <option value="g923">G923</option>
+                    </optgroup>
+                    <optgroup label="Thrustmaster Wheels">
+                        <option value="t150">T-150</option>
+                        <option value="t300">T-300</option>
+                    </optgroup>
+                </select><br><br><br>
+                <button id="cssButton" style="padding: 10px;border-radius: 3px;display: none;" onclick="getCSS()">Get Custom CSS</button>
+            </form>
+            <div id="skinMessage" style="display: none;">Your custom url is ready to be copied.</div>
+        </div>
+
+        <div id="showCSS" class="showCSS">
+            <div>Your Custom CSS Template:</div><br>
+<pre id="myCssText" style="font-size: xx-small;position: absolute;left: 10px;">  
+.wheelArea.wheelStandard {
+background-image: url(./assets/default/wheel.png);
+left: 0px;
+}
+.wheelButtons.upShift {
+background-image: url(./assets/g29/g29shiftright.png);
+}
+.wheelButtons.downShift {
+background-image: url(./assets/g29/g29shiftleft.png);
+}
+.wheelButtons.x {
+background-image: url();
+}
+.wheelButtons.square {
+background-image: url();
+}
+.wheelButtons.triangle {
+background-image: url();
+}
+.wheelButtons.circle {
+background-image: url();
+}
+.wheelButtons.l2 {
+background-image: url();
+}
+.wheelButtons.r2 {
+background-image: url();
+}
+.wheelButtons.l3 {
+background-image: url();
+}
+.wheelButtons.r3 {
+background-image: url();
+}
+.wheelButtons.plus {
+background-image: url();
+}
+.wheelButtons.minus {
+background-image: url();
+}</pre>
+            <button style="position:absolute;top: 469px;left: 200px;padding: 10px;border-radius: 3px;" onclick="getCssText()">Copy CSS</button>
         </div>
 
     </div>
@@ -96,9 +180,9 @@
 
 
 
-    <div id="wheelLocation" style="opacity: 0">
+    <div id="wheelLocation" style="display: none;">
         <div id="wheelArea" class="wheelArea">
-            <div id="wheel" class="wheelStandard"></div>
+            <div id="wheel" class="wheelArea wheelStandard"></div>
             <div id="upShift" class="wheelButtons upShift"></div>
             <div id="downShift" class="wheelButtons downShift"></div>
             <div id="x" class="wheelButtons x"></div>
@@ -116,7 +200,6 @@
             <div id="wdown" class="wheelButtons wdown"></div>
             <div id="wleft" class="wheelButtons wleft"></div>
             <div id="wright" class="wheelButtons wright"></div>
-            <div id="customMapPressed" class="customMapPressed" style="display: none;"></div>
             
         </div>
         

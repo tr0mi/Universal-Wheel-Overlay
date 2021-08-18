@@ -32,14 +32,11 @@ button:hover {
   height: 500px;
   width: 500px;
 }
-.wheelStandard {
-  position: absolute;
+.wheelArea.wheelStandard {
   background-image: url(./assets/g920/wheel.png);
   background-size: cover;
   top: 0px;
-  background-repeat: no-repeat;
-  height: 500px;
-  width: 500px;
+  left: 0px;
 }
 .wheelButtons {
   position: absolute;

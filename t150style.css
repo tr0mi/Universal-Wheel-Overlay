@@ -32,14 +32,10 @@ button:hover {
   height: 500px;
   width: 500px;
 }
-.wheelStandard {
-  position: absolute;
+.wheelArea.wheelStandard {
   background-image: url(./assets/t150/wheel.png);
-  background-size: 500px, 500px;
   top: 0px;
-  background-repeat: no-repeat;
-  height: 500px;
-  width: 500px;
+  left: 0px;
 }
 .wheelButtons {
   position: absolute;
