@@ -1,0 +1,145 @@
+body {
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0);
+  overflow: hidden;
+}
+button {
+  resize: horizontal;
+  border: 1px solid white;
+  opacity: 0.8;
+}
+button:hover {
+  opacity: 1;
+}
+.copyStyle {
+  resize: horizontal;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: relative;
+  left: 410px;
+  top: -102px;
+  height: 36px;
+}
+.prevButton {
+  height: 30px;
+}
+.wheelArea {
+  position: absolute;
+  background-size: 500px 500px;
+  background-repeat: no-repeat;
+  left: 280px;
+  top: 0px;
+  height: 540px;
+  width: 540px;
+}
+.wheelStandard {
+  position: absolute;
+  background-image: url(./assets/default/wheel.png);
+  background-size: cover;
+  top: 0px;
+  background-repeat: no-repeat;
+  height: 540px;
+  width: 540px;
+}
+.wheelButtons {
+  position: absolute;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 540px;
+  width: 540px;
+  opacity: 0;
+}
+.wheelButtons.upShift {
+  background-image: url(./assets/g29/g29shiftright.png);
+}
+.wheelButtons.downShift {
+  background-image: url(./assets/g29/g29shiftleft.png);
+}
+.wheelButtons.x {
+  background-image: url();
+}
+.wheelButtons.square {
+  background-image: url();
+}
+.wheelButtons.triangle {
+  background-image: url();
+}
+.wheelButtons.circle {
+  background-image: url();
+}
+.wheelButtons.l2 {
+  background-image: url();
+}
+.wheelButtons.r2 {
+  background-image: url();
+}
+.wheelButtons.l3 {
+  background-image: url();
+}
+.wheelButtons.r3 {
+  background-image: url();
+}
+.wheelButtons.plus {
+  background-image: url();
+}
+.wheelButtons.minus {
+  background-image: url();
+}
+.wheelButtons.returnBut {
+  background-image: url();
+}
+.wheelButtons.wup {
+  background-image: url();
+}
+.wheelButtons.wdown {
+  background-image: url();
+}
+.wheelButtons.wleft {
+  background-image: url();
+}
+.wheelButtons.wright {
+  background-image: url();
+}
+.Pedals {
+  position: absolute;
+  top: 600px;
+  left: 350px;
+  background-repeat: no-repeat;
+  background-image: url(./assets/g27/pedals.png);
+  background-size: 400px;
+  height: 300px;
+  width: 400px;
+}
+.Pedal {
+  position: absolute;
+  background-repeat: no-repeat;
+  height: 150px;
+  width: 100px;
+}
+.Gas {
+  top: -75px;
+  left: 290px;
+  background-image: url(./assets/g27/gas.png);
+  background-size: 75px;
+}
+.Brake {
+  top: -65px;
+  left: 150px;
+  background-image: url(./assets/g27/brake.png);
+  background-size: 75px;
+}
+.Clutch {
+  top: -65px;
+  left: 40px;
+  background-image: url(./assets/g27/clutch.png);
+  background-size: 75px;
+}
+.gone {
+  opacity: 0;
+}
+.customMapPressed {
+  position: absolute;
+  font-size: x-large;
+  top: 250px;
+  left: 240px;
+}

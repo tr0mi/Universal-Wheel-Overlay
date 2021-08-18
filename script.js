@@ -40,7 +40,6 @@ function swapStyleSheet(sheet) {
     document.getElementById("pagestyle").setAttribute("href", sheet);
     myform.style.display = "none";
     wheelLocation.style.opacity = "1";
-    myCal.style.display = "none";
     console.log("stylesheet set to " + sheet)
 }
 
@@ -69,6 +68,9 @@ if (myUrl.searchParams.get('wt') == "g920") {
 if (myUrl.searchParams.get('wt') == "g923") {
     swapStyleSheet("g923style.css")
 }
+if (myUrl.searchParams.get('wt') == "custom-overlay") {
+    swapStyleSheet("customstyle.css")
+}
 
 if (myUrl.searchParams.get('wt') == null && myUrl.searchParams.get('sloc') != null) {
     window.location.replace("https://tr0mi.github.io/Universal-Wheel-Overlay/"); 
@@ -77,17 +79,31 @@ else if (myUrl.searchParams.get('wt') == null && myUrl.searchParams.get('rot') !
     window.location.replace("https://tr0mi.github.io/Universal-Wheel-Overlay/"); 
 }
 
+if (myUrl.searchParams.get('show-key') == 'true') {
+    customMapPressed.style.display = "block";
+}else {
+    customMapPressed.style.display = "none";
+}
+
 function outputBox() {
     linkOutput.style.height = "auto";
 }
 
-function checkCustom() {
-    if (document.forms['wheelInfo'].elements['wt'].value == 'custom-overlay') {
-        myCal.style.display = "block";
-    }
+function dataSource(){
+    var myData =  document.getElementById("dSource");
+    var myData2 =  document.getElementById("dSource2");
+    var myNewDataSource = window.location.href + '?' + myUrl.searchParams.toString();
+    myData.setAttribute("data", myNewDataSource);
+    myData2.setAttribute("data", myNewDataSource);
+    console.log('Data location set');
+    if (document.forms['wheelInfo'].elements['wt'].value == "custom-overlay") {
+        myCal.style.opacity = 1;
+        myPreview.style.opacity = 0;
+    } 
     else {
-        myCal.style.display = "none";
+        myCal.style.opacity = 0;
+        myPreview.style.opacity = 1;
     }
-    
 }
+
 

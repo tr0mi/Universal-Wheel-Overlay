@@ -13,10 +13,10 @@
 <body>
     <div id="myform" class="mainContainer">
         <h1 id="myHeader">URL Generator for Sim Wheel Overlay</h1>
-        <form name="wheelInfo" oninput="op.value=window.location.href + '?' + myUrl.searchParams.toString();outputBox()" onsubmit="return false">
+        <form name="wheelInfo" oninput="op.value=window.location.href + '?' + myUrl.searchParams.toString();outputBox();dataSource()" onsubmit="return false">
             <div id="formContainer" class="myFormBox">
                 <label for="wt">Select a Wheel:</label><br>
-                <select style="width: 180px;" name="wt" id="wt" oninput="wheelInput();checkCustom()">
+                <select style="width: 180px;" name="wt" id="wt" oninput="wheelInput()">
                     <optgroup label="Logitech Wheels">
                         <option value="g27" >G27</option>
                         <option value="g29">G29</option>
@@ -66,11 +66,36 @@
         <!-- <button id="copyButton" class="copyStyle" onclick="getText()">Copy Link</button> -->
         
 
-
+        <div id="myPreview" class="prevWindowStyle">
+            <div id="myPrevHeader" style="font-size:xx-large;text-align: center;">Connect Your Wheel for Live Preview</div><br>
+            <div id="myPrevPic" style="position: absolute;left: -345px;top: -150px;"> 
+                <object id="dSource" type="text/html" width="1000px" height="900px" style="transform: scale(0.4);">
+                </object>
+             </div>
+        </div>
         
+        <div id="myCal" class="calStyle">
+            <div id="myCalHeader" style="font-size:xx-large;">Connect your wheel and refresh page to continue</div><br>
+            <div id="myCalMain" style="top: 130px;position: absolute;font-size: smaller;"></div>
+            <div id="myCalSecond" style="top: 170px;position: absolute;font-size: smaller;opacity: 0.8;"></div>
+            <div id="myCalPreview" style="position: absolute;left: -345px;top: -90px;"> 
+                <object id="dSource2" type="text/html" width="1000px" height="900px" style="transform: scale(0.35);">
+                </object>
+             </div>
+            <div id="myCalInfo" style="position:absolute;top:500px;font-size: smaller;"></div>
+            <div id="buttonPressTitle" style="position:absolute;top: 90px;color: black;color: rgba(0, 0, 90, 0.842);opacity: 0;"></div>
+            <div id="axisPressTitle" style="position:absolute;top: 110px;color: black;color: rgba(0, 0, 90, 0.842);opacity: 0;"></div>
+            <button onclick="endCal()" class="doneStyle">Done</button>
+        </div>
+
     </div>
-    <div id="myCal" class="calStyle">Calibration</div>
+
     
+
+
+
+
+
     <div id="wheelLocation" style="opacity: 0">
         <div id="wheelArea" class="wheelArea">
             <div id="wheel" class="wheelStandard"></div>
@@ -91,8 +116,10 @@
             <div id="wdown" class="wheelButtons wdown"></div>
             <div id="wleft" class="wheelButtons wleft"></div>
             <div id="wright" class="wheelButtons wright"></div>
+            <div id="customMapPressed" class="customMapPressed" style="display: none;"></div>
+            
         </div>
-
+        
         <div id="pedals" class="Pedals">
             <div id="gas" class="Pedal Gas"></div>  
             <div id="brake" class="Pedal Brake"></div>

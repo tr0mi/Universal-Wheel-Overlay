@@ -20,6 +20,7 @@ if (!('ongamepadconnected' in window)) {
   exampleButton.style.opacity = "1";
 }
 
+
 function pollGamepads() {
   var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
   //console.log(gamepads);
@@ -214,6 +215,36 @@ else if (myUrl.searchParams.get('wt') == "t300") { /////////////// t300 mapping 
   mappingAxes[8] = "";
   mappingAxes[9] = "arrows";
 }
+else if (myUrl.searchParams.get('wt') == "custom-overlay") {   // custom mapping
+  setCustomMapping();
+}
+
+
+function setCustomMapping() {                   // convert url params to custom mapping
+  var myParams = myUrl.searchParams.toString();
+  var nameParam = "";
+  var valueParam = -1;
+  splitParams = myParams.split('&');
+  for (i = 0; i < splitParams.length; i++) {
+    indiParams = splitParams[i].split('=');
+    nameParam = indiParams[0];
+    valueParam = indiParams[1];
+    if (nameParam != "wt" && nameParam != "rot" && nameParam != "sloc" && nameParam != "wheel") {
+      mappingButtons[valueParam] = nameParam;
+      console.log("new mapping: " + mappingButtons);
+    } else if (nameParam == "wheel" || nameParam == "gas" || nameParam == "brake" || nameParam == "clutch") {
+      mappingAxes[valueParam] = nameParam;
+    }
+
+  }
+}
+
+function endCal() {
+  myCal.style.opacity = 0;
+  myUrl.searchParams.set('show-key', 'true')
+  op.innerHTML = window.location.href + "?" + myUrl.searchParams.toString();   
+}
+
 
 
 ////////////////////////////
@@ -225,6 +256,12 @@ function buttonPressed(b) {
   return b == 1.0;
 }
 
+
+var currentButton = -1;
+var askedPress = 'dshift';
+var currentAxis = -1;
+var askedAxis = 'wheel';
+
 // Gamepad Loop
 
 function gameLoop() {
@@ -233,7 +270,133 @@ function gameLoop() {
     return;
   }
 
+
+
+  var calInit = false; //////// initialise calibration ////////////
+  if (document.forms['wheelInfo'].elements['wt'].value == 'custom-overlay') {
+    calInit = true;
+  }
+  else {
+    calInit = false;
+  }
+  
   var gp = gamepads[0];
+
+  for (i = 0; i < gp.buttons.length; i++) {
+    var val = gp.buttons[i];
+    if (val.value == true) {
+      customMapPressed.innerHTML = mappingButtons[i];
+    }
+  }
+
+  if (calInit == true) {  
+    myCalHeader.innerHTML = "Calibration";
+    myCalMain.innerHTML = "Welcome to custom wheel calibration, here you will allocate your buttons to the button names shown. <br>After each button-press, the next button will appear. <br>Begin by turning your wheel to full lock in both directions.";
+    buttonPressTitle.innerHTML = "Button " + currentButton + " is assigned to:   " + mappingButtons[currentButton];
+    axisPressTitle.innerHTML = "Axis " + currentAxis + " is assigned to:   " + mappingAxes[currentAxis];
+    if (gp) {
+      myCalInfo.innerHTML = "Gamepad connected at index " + gp.index + ": " + gp.id +
+        ". It has " + gp.buttons.length + " buttons and " + gp.axes.length + " axes.";
+    } else {
+      myCalHeader.innerHTML = "Connect your wheel and refresh page to continue";
+    }
+
+
+    
+    /////////////////////////// START OF CALIBRATION ///////////////////////////
+    // Cycle through buttons
+    for (i = 0; i < gp.buttons.length; i++) {
+      var val = gp.buttons[i];
+      if (val.value == true && i != currentButton) {
+        currentButton = i;      // set current button to the button pressed     
+        buttonPressTitle.style.opacity = 0.7;    
+        if (mappingButtons[currentButton] == undefined && mappingAxes.indexOf('wheel') != -1) {
+          mappingButtons[currentButton] = askedPress;  // map the current button to the button asked for
+          myUrl.searchParams.set(askedPress, currentButton);
+          op.innerHTML = window.location.href + "?" + myUrl.searchParams.toString();   
+          myCalSecond.innerHTML = "";
+        } else {
+          myCalSecond.innerHTML = "Button " + currentButton + " is already assigned to " + mappingButtons[currentButton] + ", choose a new button to assign " + askedPress + " to."
+          console.log("try again")
+        }   
+      }
+    }
+    
+    // Cycle through axes
+    for (i = 0; i < gp.axes.length; i++) {
+      var val = gp.axes[i];
+      if (val == -1 && i != currentAxis) {
+        currentAxis = i;
+        myCalMain.style.fontSize = "x-large";
+        axisPressTitle.style.opacity = 0.7;  
+        console.log(i);
+        if (mappingAxes[currentAxis] == undefined) {
+          mappingAxes[currentAxis] = askedAxis;
+          myCalSecond.innerHTML = "";
+          myUrl.searchParams.set(askedAxis, currentAxis);
+          op.innerHTML = window.location.href + "?" + myUrl.searchParams.toString();   
+        } else {
+          myCalSecond.innerHTML = "Axis " + currentAxis + " is already assigned to " + mappingAxes[currentAxis] + ", choose a new button to assign " + askedAxis + " to."
+          console.log("try again")
+        }   
+      }
+      
+    }
+
+    if (mappingAxes.indexOf('wheel') != -1) {   // if a button has been set, move on
+      myCalMain.innerHTML = "Now press downshift";
+      askedPress = 'dshift';
+      if (mappingButtons.indexOf('dshift') != -1) {     
+        myCalMain.innerHTML = "Now press upshift";
+        askedPress = 'ushift';
+        if (mappingButtons.indexOf('ushift') != -1) {
+          myCalMain.innerHTML = "Now press Square";
+          askedPress = 'square';
+          if (mappingButtons.indexOf('square') != -1) {
+            myCalMain.innerHTML = "Now press x";
+            askedPress = 'x';
+            if (mappingButtons.indexOf('x') != -1) {
+              myCalMain.innerHTML = "Now press Circle";
+              askedPress = 'circle';
+              if (mappingButtons.indexOf('circle') != -1) {
+                myCalMain.innerHTML = "Now press Triangle";
+                askedPress = 'triangle';
+                if (mappingButtons.indexOf('triangle') != -1) {
+                  myCalMain.innerHTML = "Now press L2";
+                  askedPress = 'l2';
+                  if (mappingButtons.indexOf('l2') != -1) {
+                    myCalMain.innerHTML = "Now press R2";
+                    askedPress = 'r2';
+                    if (mappingButtons.indexOf('r2') != -1) {
+                      myCalMain.innerHTML = "Now press L3";
+                      askedPress = 'l3';
+                      if (mappingButtons.indexOf('l3') != -1) {
+                        myCalMain.innerHTML = "Now press R3";
+                        askedPress = 'r3';
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    
+
+  }
+
+
+///////////////////////// Preview Header ///////////////////////////////
+  if (gp) {
+    myPrevHeader.innerHTML = "Live Preview";
+  } else {
+    myPrevHeader.innerHTML = "Connect Your Wheel for Live Preview";
+  }
+
+  
 
   /////////////////////////////////////////// Wheel Buttons //////////////////////////////////////////////
   if (buttonPressed(gp.buttons[mappingButtons.indexOf('dshift')])) {downShift.style.opacity = "1";} else {downShift.style.opacity = "0";}
