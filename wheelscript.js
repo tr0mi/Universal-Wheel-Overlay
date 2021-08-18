@@ -49,7 +49,7 @@ var mappingAxes = new Array();
 
 /////////////// g27 mapping /////////////
 
-if (myUrl.searchParams.get('wt') == "g27") {
+if (myUrl.searchParams.get('wt') == "g27" && myUrl.searchParams.get('skin') != "true") {
   mappingButtons[0] = "sb0";
   mappingButtons[1] = "sb1";
   mappingButtons[2] = "sb2";
@@ -85,7 +85,7 @@ if (myUrl.searchParams.get('wt') == "g27") {
   mappingAxes[8] = "";
   mappingAxes[9] = "arrows";
 }
-else if (myUrl.searchParams.get('wt') == "g29" || myUrl.searchParams.get('wt') == "g923") { /////////////// g29 mapping /////////////
+else if ((myUrl.searchParams.get('wt') == "g29" || myUrl.searchParams.get('wt') == "g923") && myUrl.searchParams.get('skin') != "true") { /////////////// g29 mapping /////////////
   mappingButtons[0] = "x";
   mappingButtons[1] = "square";
   mappingButtons[2] = "circle";
@@ -122,7 +122,7 @@ else if (myUrl.searchParams.get('wt') == "g29" || myUrl.searchParams.get('wt') =
   mappingAxes[8] = "";
   mappingAxes[9] = "arrows";
 }
-else if (myUrl.searchParams.get('wt') == "g920") { /////////////// g920 mapping /////////////
+else if (myUrl.searchParams.get('wt') == "g920" && myUrl.searchParams.get('skin') != "true") { /////////////// g920 mapping /////////////
   mappingButtons[0] = "x";
   mappingButtons[1] = "square";
   mappingButtons[2] = "circle";
@@ -153,7 +153,7 @@ else if (myUrl.searchParams.get('wt') == "g920") { /////////////// g920 mapping 
   mappingAxes[8] = "";
   mappingAxes[9] = "arrows";
 }
-else if (myUrl.searchParams.get('wt') == "t150") { /////////////// t150 mapping /////////////
+else if (myUrl.searchParams.get('wt') == "t150" && myUrl.searchParams.get('skin') != "true") { /////////////// t150 mapping /////////////
   mappingButtons[0] = "dshift";
   mappingButtons[1] = "ushift";
   mappingButtons[2] = "triangle";
@@ -184,7 +184,7 @@ else if (myUrl.searchParams.get('wt') == "t150") { /////////////// t150 mapping 
   mappingAxes[8] = "";
   mappingAxes[9] = "arrows";
 }
-else if (myUrl.searchParams.get('wt') == "t300") { /////////////// t300 mapping /////////////
+else if (myUrl.searchParams.get('wt') == "t300" && myUrl.searchParams.get('skin') != "true") { /////////////// t300 mapping /////////////
   mappingButtons[0] = "dshift";
   mappingButtons[1] = "ushift";
   mappingButtons[2] = "triangle";
@@ -215,7 +215,7 @@ else if (myUrl.searchParams.get('wt') == "t300") { /////////////// t300 mapping 
   mappingAxes[8] = "";
   mappingAxes[9] = "arrows";
 }
-else if (myUrl.searchParams.get('wt') == "custom-overlay") {   // custom mapping
+else if (myUrl.searchParams.get('wt') == "custom-overlay" || myUrl.searchParams.get('skin') == "true") {   // custom mapping
   setCustomMapping();
 }
 
@@ -229,7 +229,7 @@ function setCustomMapping() {                   // convert url params to custom 
     indiParams = splitParams[i].split('=');
     nameParam = indiParams[0];
     valueParam = indiParams[1];
-    if (nameParam != "wt" && nameParam != "rot" && nameParam != "sloc" && nameParam != "wheel") {
+    if (nameParam != "wt" && nameParam != "rot" && nameParam != "sloc" && nameParam != "wheel" && nameParam != "show-key") {
       mappingButtons[valueParam] = nameParam;
       console.log("new mapping: " + mappingButtons);
     } else if (nameParam == "wheel" || nameParam == "gas" || nameParam == "brake" || nameParam == "clutch") {
@@ -241,10 +241,9 @@ function setCustomMapping() {                   // convert url params to custom 
 
 function endCal() {
   myCal.style.opacity = 0;
-  myUrl.searchParams.set('show-key', 'true')
-  op.innerHTML = window.location.href + "?" + myUrl.searchParams.toString();   
+  postCal.style.display = 'block';
+  // op.innerHTML = window.location.href + "?" + myUrl.searchParams.toString();   
 }
-
 
 
 ////////////////////////////
@@ -258,9 +257,10 @@ function buttonPressed(b) {
 
 
 var currentButton = -1;
-var askedPress = 'dshift';
+var askedPress = '';
 var currentAxis = -1;
 var askedAxis = 'wheel';
+var wheelToggle = 'dshift';
 
 // Gamepad Loop
 
@@ -269,7 +269,6 @@ function gameLoop() {
   if (!gamepads) {
     return;
   }
-
 
 
   var calInit = false; //////// initialise calibration ////////////
@@ -282,97 +281,121 @@ function gameLoop() {
   
   var gp = gamepads[0];
 
-  for (i = 0; i < gp.buttons.length; i++) {
-    var val = gp.buttons[i];
-    if (val.value == true) {
-      customMapPressed.innerHTML = mappingButtons[i];
-    }
-  }
-
-  if (calInit == true) {  
-    myCalHeader.innerHTML = "Calibration";
-    myCalMain.innerHTML = "Welcome to custom wheel calibration, here you will allocate your buttons to the button names shown. <br>After each button-press, the next button will appear. <br>Begin by turning your wheel to full lock in both directions.";
-    buttonPressTitle.innerHTML = "Button " + currentButton + " is assigned to:   " + mappingButtons[currentButton];
-    axisPressTitle.innerHTML = "Axis " + currentAxis + " is assigned to:   " + mappingAxes[currentAxis];
-    if (gp) {
-      myCalInfo.innerHTML = "Gamepad connected at index " + gp.index + ": " + gp.id +
-        ". It has " + gp.buttons.length + " buttons and " + gp.axes.length + " axes.";
-    } else {
-      myCalHeader.innerHTML = "Connect your wheel and refresh page to continue";
-    }
-
+////////////////////////////////////////// START OF CALIBRATION //////////////////////////////////////////////////
+  if (document.forms['wheelInfo'].elements['wt'].value == "custom-overlay") {
 
     
-    /////////////////////////// START OF CALIBRATION ///////////////////////////
-    // Cycle through buttons
+    if (askedPress == wheelToggle) {
+      dataSource();
+      wheelToggle = 'end';
+    }
+
     for (i = 0; i < gp.buttons.length; i++) {
       var val = gp.buttons[i];
-      if (val.value == true && i != currentButton) {
-        currentButton = i;      // set current button to the button pressed     
-        buttonPressTitle.style.opacity = 0.7;    
-        if (mappingButtons[currentButton] == undefined && mappingAxes.indexOf('wheel') != -1) {
-          mappingButtons[currentButton] = askedPress;  // map the current button to the button asked for
-          myUrl.searchParams.set(askedPress, currentButton);
-          op.innerHTML = window.location.href + "?" + myUrl.searchParams.toString();   
-          myCalSecond.innerHTML = "";
-        } else {
-          myCalSecond.innerHTML = "Button " + currentButton + " is already assigned to " + mappingButtons[currentButton] + ", choose a new button to assign " + askedPress + " to."
-          console.log("try again")
-        }   
+      if (val.value == true && mappingButtons[i] != undefined) {
+        document.getElementById("prev" + mappingButtons[i]).style.color = 'red';
       }
-    }
-    
-    // Cycle through axes
-    for (i = 0; i < gp.axes.length; i++) {
-      var val = gp.axes[i];
-      if (val == -1 && i != currentAxis) {
-        currentAxis = i;
-        myCalMain.style.fontSize = "x-large";
-        axisPressTitle.style.opacity = 0.7;  
-        console.log(i);
-        if (mappingAxes[currentAxis] == undefined) {
-          mappingAxes[currentAxis] = askedAxis;
-          myCalSecond.innerHTML = "";
-          myUrl.searchParams.set(askedAxis, currentAxis);
-          op.innerHTML = window.location.href + "?" + myUrl.searchParams.toString();   
-        } else {
-          myCalSecond.innerHTML = "Axis " + currentAxis + " is already assigned to " + mappingAxes[currentAxis] + ", choose a new button to assign " + askedAxis + " to."
-          console.log("try again")
-        }   
+      else if (val.value == false && mappingButtons[i] != undefined) {
+        document.getElementById("prev" + mappingButtons[i]).style.color = 'black';
       }
-      
     }
 
-    if (mappingAxes.indexOf('wheel') != -1) {   // if a button has been set, move on
-      myCalMain.innerHTML = "Now press downshift";
-      askedPress = 'dshift';
-      if (mappingButtons.indexOf('dshift') != -1) {     
-        myCalMain.innerHTML = "Now press upshift";
-        askedPress = 'ushift';
-        if (mappingButtons.indexOf('ushift') != -1) {
-          myCalMain.innerHTML = "Now press Square";
-          askedPress = 'square';
-          if (mappingButtons.indexOf('square') != -1) {
-            myCalMain.innerHTML = "Now press x";
-            askedPress = 'x';
-            if (mappingButtons.indexOf('x') != -1) {
-              myCalMain.innerHTML = "Now press Circle";
-              askedPress = 'circle';
-              if (mappingButtons.indexOf('circle') != -1) {
-                myCalMain.innerHTML = "Now press Triangle";
-                askedPress = 'triangle';
-                if (mappingButtons.indexOf('triangle') != -1) {
-                  myCalMain.innerHTML = "Now press L2";
-                  askedPress = 'l2';
-                  if (mappingButtons.indexOf('l2') != -1) {
-                    myCalMain.innerHTML = "Now press R2";
-                    askedPress = 'r2';
-                    if (mappingButtons.indexOf('r2') != -1) {
-                      myCalMain.innerHTML = "Now press L3";
-                      askedPress = 'l3';
-                      if (mappingButtons.indexOf('l3') != -1) {
-                        myCalMain.innerHTML = "Now press R3";
-                        askedPress = 'r3';
+
+
+    if (calInit == true) {  
+      myCalHeader.innerHTML = "Calibration";
+      myCalMain.innerHTML = "Welcome to custom wheel calibration, here you will allocate your buttons to the button names shown. <br>After each button-press, the next button will appear. <br>Begin by turning your wheel to full lock in both directions.";
+      buttonPressTitle.innerHTML = "Button " + currentButton + " is assigned to:   " + mappingButtons[currentButton];
+      axisPressTitle.innerHTML = "Axis " + currentAxis + " is assigned to:   " + mappingAxes[currentAxis];
+      if (gp) {
+        myCalInfo.innerHTML = "Gamepad connected at index " + gp.index + ": " + gp.id +
+          ". It has " + gp.buttons.length + " buttons and " + gp.axes.length + " axes.";
+      } else {
+        myCalHeader.innerHTML = "Connect your wheel and refresh page to continue";
+      }
+  
+  
+      
+      
+      // Cycle through buttons
+      for (i = 0; i < gp.buttons.length; i++) {
+        var val = gp.buttons[i];
+        if (val.value == true && i != currentButton) {
+          currentButton = i;      // set current button to the button pressed     
+          buttonPressTitle.style.opacity = 0.7;
+          if (mappingButtons[currentButton] == undefined && mappingAxes.indexOf('wheel') != -1) {
+            mappingButtons[currentButton] = askedPress;  // map the current button to the button asked for
+            myUrl.searchParams.set(askedPress, currentButton);
+            op.innerHTML = window.location.href + "?" + myUrl.searchParams.toString();   
+            myCalSecond.innerHTML = "";
+            divId = "prev" + askedPress;
+            document.getElementById(divId).innerHTML = "'" + askedPress + "' mapped to button: " + mappingButtons.indexOf(askedPress);
+          } else {
+            myCalSecond.innerHTML = "Button " + currentButton + " is already assigned to " + mappingButtons[currentButton] + ", choose a new button to assign " + askedPress + " to."
+            console.log("try again")
+          }  
+        }
+      }
+      
+  
+  
+  
+  
+  
+      // Cycle through axes
+      for (i = 0; i < gp.axes.length; i++) {
+        var val = gp.axes[i];
+        if (val == -1 && i != currentAxis) {
+          currentAxis = i;
+          myCalMain.style.fontSize = "x-large";
+          axisPressTitle.style.opacity = 0.7;  
+          console.log(i);
+          if (mappingAxes[currentAxis] == undefined) {
+            mappingAxes[currentAxis] = askedAxis;
+            myCalSecond.innerHTML = "";
+            myUrl.searchParams.set(askedAxis, currentAxis);
+            op.innerHTML = window.location.href + "?" + myUrl.searchParams.toString();   
+            divId2 = "prev" + askedAxis;
+            document.getElementById(divId2).innerHTML = "'" + askedAxis + "' mapped to axis: " + mappingAxes.indexOf(askedAxis);
+          } else {
+            myCalSecond.innerHTML = "Axis " + currentAxis + " is already assigned to " + mappingAxes[currentAxis] + ", choose a new button to assign " + askedAxis + " to."
+            console.log("try again")
+          }   
+        }
+        
+      }
+  
+      if (mappingAxes.indexOf('wheel') != -1) {   // if a button has been set, move on
+        myCalMain.innerHTML = "Now press downshift";
+        askedPress = 'dshift';
+        if (mappingButtons.indexOf('dshift') != -1) {     
+          myCalMain.innerHTML = "Now press upshift";
+          askedPress = 'ushift';
+          if (mappingButtons.indexOf('ushift') != -1) {
+            myCalMain.innerHTML = "Now press Square";
+            askedPress = 'square';
+            if (mappingButtons.indexOf('square') != -1) {
+              myCalMain.innerHTML = "Now press x";
+              askedPress = 'x';
+              if (mappingButtons.indexOf('x') != -1) {
+                myCalMain.innerHTML = "Now press Circle";
+                askedPress = 'circle';
+                if (mappingButtons.indexOf('circle') != -1) {
+                  myCalMain.innerHTML = "Now press Triangle";
+                  askedPress = 'triangle';
+                  if (mappingButtons.indexOf('triangle') != -1) {
+                    myCalMain.innerHTML = "Now press L2";
+                    askedPress = 'l2';
+                    if (mappingButtons.indexOf('l2') != -1) {
+                      myCalMain.innerHTML = "Now press R2";
+                      askedPress = 'r2';
+                      if (mappingButtons.indexOf('r2') != -1) {
+                        myCalMain.innerHTML = "Now press L3";
+                        askedPress = 'l3';
+                        if (mappingButtons.indexOf('l3') != -1) {
+                          myCalMain.innerHTML = "Now press R3";
+                          askedPress = 'r3';
+                        }
                       }
                     }
                   }
@@ -382,11 +405,11 @@ function gameLoop() {
           }
         }
       }
+  
     }
-
-    
-
+  
   }
+
 
 
 ///////////////////////// Preview Header ///////////////////////////////
@@ -476,7 +499,6 @@ function gameLoop() {
 
   start = requestAnimationFrame(gameLoop);
 }
-
 
 
 /////////////////////////////////////////// Functionality Example //////////////////////////////////////////////

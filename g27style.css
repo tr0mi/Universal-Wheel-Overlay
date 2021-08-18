@@ -28,19 +28,12 @@ button:hover {
   background-size: 500px 500px;
   background-repeat: no-repeat;
   left: 300px;
-  top: 0px;
   height: 500px;
   width: 500px;
 }
-.wheelStandard {
-  position: absolute;
+.wheelArea.wheelStandard {
   background-image: url(./assets/g27/g27wheel.png);
-  background-size: 500px 500px;
-  top: 0px;
   left: 0px;
-  background-repeat: no-repeat;
-  height: 500px;
-  width: 500px;
 }
 .wheelButtons {
   position: absolute;

@@ -46,6 +46,20 @@ h1 {
   overflow: hidden;
   opacity: 0;
 }
+.postCalStyle {
+  border-left: 3px solid rgba(0, 0, 36, 0.842);
+  position: absolute;
+  top: 0px;
+  left: 700px;
+  width: 320px;
+  height: 510px;
+  padding: 20px;
+  padding-top: 30px;
+  background-color: rgba(255, 255, 255, 0.788);
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: none;
+}
 .prevWindowStyle {
   border-left: 3px solid rgba(0, 0, 36, 0.842);
   position: absolute;
@@ -59,6 +73,20 @@ h1 {
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   opacity: 1;
+}
+.showCSS {
+  border-left: 3px solid rgba(0, 0, 36, 0.842);
+  position: absolute;
+  top: 0px;
+  left: 700px;
+  width: 320px;
+  height: 510px;
+  padding: 20px;
+  padding-top: 30px;
+  background-color: rgba(255, 255, 255, 0.788);
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: none;
 }
 .myFormBox {
   padding-left: 30px;
@@ -106,8 +134,8 @@ button:hover {
   border-radius: 5px;
   position: absolute;
   padding: 10px;
-  left: 270px;
-  top: 40px;
+  left: 10px;
+  top: 469px;
   height: 37px;
 }
 .desc {
