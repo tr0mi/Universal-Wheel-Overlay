@@ -61,7 +61,7 @@ if (myUrl.searchParams.get('wt') == "t150") {
     swapStyleSheet("t150style.css")
 }
 if (myUrl.searchParams.get('wt') == "t300") {
-    swapStyleSheet("t150style.css")
+    swapStyleSheet("t300style.css")
 }
 if (myUrl.searchParams.get('wt') == "g920") {
     swapStyleSheet("g920style.css")
@@ -109,6 +109,10 @@ function dataSource(){
 function getCSS() {
     postCal.style.display = "none";
     showCSS.style.display = "block";
+}
+function backToMap() {
+    postCal.style.display = "block";
+    showCSS.style.display = "none";
 }
 function getCssText() {
     var copyText = document.getElementById('myCssText').textContent;
