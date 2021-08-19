@@ -1,0 +1,177 @@
+body {
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0);
+  overflow: hidden;
+}
+button {
+  resize: horizontal;
+  border: 1px solid white;
+  opacity: 0.8;
+}
+button:hover {
+  opacity: 1;
+}
+.copyStyle {
+  resize: horizontal;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: relative;
+  left: 410px;
+  top: -102px;
+  height: 36px;
+}
+.prevButton {
+  height: 30px;
+}
+.wheelArea {
+  position: absolute;
+  background-size: 500px 500px;
+  background-repeat: no-repeat;
+  left: 300px;
+  top: 0px;
+  height: 500px;
+  width: 500px;
+}
+.wheelArea.wheelStandard {
+  background-image: url(./assets/t150/wheel.png);
+  top: 0px;
+  left: 0px;
+}
+.wheelButtons {
+  position: absolute;
+  background-size: 500px, 500px;
+  background-repeat: no-repeat;
+  height: 500px;
+  width: 500px;
+  opacity: 0;
+}
+.wheelButtons.upShift {
+  background-image: url(./assets/t150/upshift.png);
+}
+.wheelButtons.downShift {
+  background-image: url(./assets/t150/downshift.png);
+}
+.wheelButtons.button7 {
+  background-image: url(./assets/t150/x.png);
+}
+.wheelButtons.button20 {
+  background-image: url(./assets/t150/square.png);
+}
+.wheelButtons.button22 {
+  background-image: url(./assets/t150/triangle.png);
+}
+.wheelButtons.button6 {
+  background-image: url(./assets/t150/circle.png);
+}
+.wheelButtons.button19 {
+  background-image: url(./assets/g27/button19.png);
+}
+.wheelButtons.button21 {
+  background-image: url(./assets/g27/button21.png);
+}
+.pedalArea {
+  position: absolute;
+  top: 500px;
+  left: 350px;
+  background-repeat: no-repeat;
+  background-size: 400px;
+  height: 400px;
+  width: 400px;
+}
+.pedalArea.Pedals {
+  background-image: url(./assets/t300/pedals.png);
+}
+.Pedal {
+  position: absolute;
+  background-repeat: no-repeat;
+  height: 400px;
+  width: 400px;
+  background-size: 400px;
+}
+.Gas {
+  background-image: url(./assets/t300/gas.png);
+}
+.Brake {
+  background-image: url(./assets/t300/brake.png);
+}
+.Clutch {
+  background-image: url(./assets/t300/clutch.png);
+}
+.shiftArea {
+  position: absolute;
+  background-repeat: no-repeat;
+  height: 500px;
+  width: 500px;
+  background-size: 500px auto;
+  top: 350px;
+  left: 100px;
+}
+.shifterBase {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 200px auto;
+  height: 500px;
+  width: 500px;
+  background-image: url(./assets/t150/shifterbase.png);
+}
+.shifterButtons {
+  position: absolute;
+  background-size: 500px auto;
+  height: 500px;
+  width: 500px;
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+.Right {
+  left: 780px;
+}
+.Shifter {
+  position: absolute;
+  top: -50px;
+  left: 50px;
+  height: 500px;
+  width: 500px;
+  background-repeat: no-repeat;
+  background-image: url(./assets/t150/shifter.png);
+  background-size: 120px;
+  transition-duration: 300ms;
+}
+.shifterButtons.button0 {
+  background-image: url(./assets/g27/button0.png);
+}
+.shifterButtons.button1 {
+  background-image: url(./assets/g27/button1.png);
+}
+.shifterButtons.button2 {
+  background-image: url(./assets/g27/button2.png);
+}
+.shifterButtons.button3 {
+  background-image: url(./assets/g27/button3.png);
+}
+.shifterButtons.button15 {
+  background-image: url(./assets/g27/button15.png);
+}
+.shifterButtons.button16 {
+  background-image: url(./assets/g27/button16.png);
+}
+.shifterButtons.button17 {
+  background-image: url(./assets/g27/button17.png);
+}
+.shifterButtons.button18 {
+  background-image: url(./assets/g27/button18.png);
+}
+.shifterButtons.arrow1 {
+  background-image: url(./assets/g27/arrow1.png);
+}
+.shifterButtons.arrow2 {
+  background-image: url(./assets/g27/arrow2.png);
+}
+.shifterButtons.arrow3 {
+  background-image: url(./assets/g27/arrow3.png);
+}
+.shifterButtons.arrow4 {
+  background-image: url(./assets/g27/arrow4.png);
+}
+.gone {
+  opacity: 0;
+}

@@ -83,6 +83,9 @@ button:hover {
 .wheelButtons.returnBut {
   background-image: url();
 }
+.wheelButtons.psBut {
+  background-image: url();
+}
 .wheelButtons.wup {
   background-image: url();
 }
@@ -95,39 +98,33 @@ button:hover {
 .wheelButtons.wright {
   background-image: url();
 }
-.Pedals {
+.pedalArea {
   position: absolute;
-  top: 600px;
+  top: 500px;
   left: 350px;
   background-repeat: no-repeat;
-  background-image: url(./assets/g27/pedals.png);
   background-size: 400px;
-  height: 300px;
+  height: 400px;
   width: 400px;
+}
+.pedalArea.Pedals {
+  background-image: url(./assets/t300/pedals.png);
 }
 .Pedal {
   position: absolute;
   background-repeat: no-repeat;
-  height: 150px;
-  width: 100px;
+  height: 400px;
+  width: 400px;
+  background-size: 400px;
 }
 .Gas {
-  top: -75px;
-  left: 290px;
-  background-image: url(./assets/g27/gas.png);
-  background-size: 75px;
+  background-image: url(./assets/t300/gas.png);
 }
 .Brake {
-  top: -65px;
-  left: 150px;
-  background-image: url(./assets/g27/brake.png);
-  background-size: 75px;
+  background-image: url(./assets/t300/brake.png);
 }
 .Clutch {
-  top: -65px;
-  left: 40px;
-  background-image: url(./assets/g27/clutch.png);
-  background-size: 75px;
+  background-image: url(./assets/t300/clutch.png);
 }
 .gone {
   opacity: 0;

@@ -77,6 +77,7 @@
         <div id="myCal" class="calStyle">
             <div id="myCalHeader" style="font-size:xx-large;">Connect your wheel and refresh page to continue</div><br>
             <div id="myCalMain" style="top: 130px;position: absolute;font-size: smaller;"></div>
+            <button id="noClutch" onclick="clutchSkip()" style="position:absolute;top: 130px;left: 280px;padding: 10px;border-radius: 3px;display: none;z-index: 99999;">Skip</button>
             <div id="myCalSecond" style="top: 170px;position: absolute;font-size: smaller;opacity: 0.8;"></div>
             <div id="myCalPreview" style="position: absolute;left: -300px;top: -90px;"> 
                 <object id="dSource2" type="text/html" width="1000px" height="900px" style="transform: scale(0.35);">
@@ -89,7 +90,7 @@
         </div>
 
         <div id="postCal" class="postCalStyle">
-            <div id="postCalMain" style="font-size: x-large;">Your button layout is:</div><br><br>
+            <div id="postCalMain" style="font-size: x-large;">Your button layout is:</div><br>
             <div id="prevwheel"></div>
             <div id="prevgas"></div>
             <div id="prevbrake"></div>
@@ -103,7 +104,11 @@
             <div id="prevl2"></div>
             <div id="prevr2"></div>
             <div id="prevl3"></div>
-            <div id="prevr3"></div><br><br>
+            <div id="prevr3"></div>
+            <div id="prevplus"></div>
+            <div id="prevminus"></div>
+            <div id="prevreturn"></div>
+            <div id="prevps"></div><br>
             <form name="skinForm" onsubmit="return false">
                 <label for="wt">Would you like to use a preset skin, or upload your own?</label><br>
                 <select style="width: 180px;" name="skinType" id="skinType" oninput="checkSkinOption()">
@@ -120,18 +125,29 @@
                         <option value="t150">T-150</option>
                         <option value="t300">T-300</option>
                     </optgroup>
-                </select><br><br><br>
+                </select><br><br>
                 <button id="cssButton" style="padding: 10px;border-radius: 3px;display: none;" onclick="getCSS()">Get Custom CSS</button>
             </form>
-            <div id="skinMessage" style="display: none;">Your custom url is ready to be copied.</div>
+            <div id="skinMessage" style="display: none;font-size: medium;">Your custom url is ready to be copied.</div>
         </div>
 
         <div id="showCSS" class="showCSS">
-            <div>Your Custom CSS Template:</div><br>
-<pre id="myCssText" style="font-size: xx-small;position: absolute;left: 10px;">  
-.wheelArea.wheelStandard {
+            <div>Your Custom CSS Template:</div>
+<pre id="myCssText" style="font-size:70%;line-height: 95%;position: absolute;left: 10px;">.wheelArea.wheelStandard {  
 background-image: url(./assets/default/wheel.png);
 left: 0px;
+}
+.pedalArea.Pedals {
+background-image: url(./assets/t300/pedals.png);
+}
+.Gas {
+background-image: url(./assets/t300/gas.png);
+}
+.Brake {
+background-image: url(./assets/t300/brake.png);
+}
+.Clutch {
+background-image: url(./assets/t300/clutch.png);
 }
 .wheelButtons.upShift {
 background-image: url(./assets/g29/g29shiftright.png);
@@ -168,8 +184,15 @@ background-image: url();
 }
 .wheelButtons.minus {
 background-image: url();
+}
+.wheelButtons.returnBut {
+background-image: url();
+}
+.wheelButtons.psBut {
+background-image: url();
 }</pre>
-            <button style="position:absolute;top: 469px;left: 200px;padding: 10px;border-radius: 3px;" onclick="getCssText()">Copy CSS</button>
+            <button style="position:absolute;top: 450px;left: 200px;padding: 10px;border-radius: 3px;" onclick="getCssText()">Copy CSS</button>
+            <button style="position:absolute;top: 500px;left: 200px;padding: 10px;border-radius: 3px;" onclick="backToMap()">Back to Mapping</button>
         </div>
 
     </div>
@@ -196,6 +219,7 @@ background-image: url();
             <div id="plus" class="wheelButtons plus"></div>
             <div id="minus" class="wheelButtons minus"></div>
             <div id="returnBut" class="wheelButtons returnBut"></div>
+            <div id="psBut" class="wheelButtons psBut"></div>
             <div id="wup" class="wheelButtons wup"></div>
             <div id="wdown" class="wheelButtons wdown"></div>
             <div id="wleft" class="wheelButtons wleft"></div>
@@ -203,7 +227,7 @@ background-image: url();
             
         </div>
         
-        <div id="pedals" class="Pedals">
+        <div id="pedals" class="pedalArea Pedals">
             <div id="gas" class="Pedal Gas"></div>  
             <div id="brake" class="Pedal Brake"></div>
             <div id="clutch" class="Pedal Clutch"></div>

@@ -49,6 +49,7 @@ h1 {
 .postCalStyle {
   border-left: 3px solid rgba(0, 0, 36, 0.842);
   position: absolute;
+  font-size: smaller;
   top: 0px;
   left: 700px;
   width: 320px;
