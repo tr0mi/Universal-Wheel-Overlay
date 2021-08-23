@@ -229,7 +229,7 @@ function setCustomMapping() {                   // convert url params to custom 
     indiParams = splitParams[i].split('=');
     nameParam = indiParams[0];
     valueParam = indiParams[1];
-    if (nameParam != "wt" && nameParam != "rot" && nameParam != "sloc" && nameParam != "wheel" && nameParam != "gas" && nameParam != "brake" && nameParam != "clutch" && nameParam != "show-key") {
+    if (nameParam != "wt" && nameParam != "rot" && nameParam != "sloc" && nameParam != "wheel" && nameParam != "gas" && nameParam != "brake" && nameParam != "clutch") {
       mappingButtons[valueParam] = nameParam;
       console.log("new mapping: " + mappingButtons);
     } else if (nameParam == "wheel" || nameParam == "gas" || nameParam == "brake" || nameParam == "clutch") {
@@ -268,7 +268,7 @@ var askedAxis = 'wheel';
 var clutchToggle = 'clutch';
 var noClutchToggle = false;
 
-// Gamepad Loop
+/////////////////////////////////////////// Start of Gamepad Loop ///////////////////////////////////////////////
 
 function gameLoop() {
   var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
